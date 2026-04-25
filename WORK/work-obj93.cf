@@ -1,73 +1,103 @@
 v 4
-file "/home/a838585/Desktop/aoc2/proyecto1/MIPS_VHDL/" "adder32.vhd" "339700347bc18f946eeefaa852f84232f5009a57" "20260406090058.344":
-  entity adder32 at 20( 467) + 0 on 23;
-  architecture behavioral of adder32 at 39( 1059) + 0 on 24;
-file "/home/a838585/Desktop/aoc2/proyecto1/MIPS_VHDL/" "ALU_2026.vhd" "3d2f7db4492935f454dd1a69c2b14151942367a6" "20260406090100.074":
-  entity alu_vector_mac at 11( 396) + 0 on 47;
-  architecture behavioral of alu_vector_mac at 32( 1283) + 0 on 48;
-file "/home/a838585/Desktop/aoc2/proyecto1/MIPS_VHDL/" "AOC2_SoC_2026.vhd" "32127fe4d21672d44b18730cba8808104cb2a0ee" "20260406090057.064":
+file "/home/a838585/Desktop/aoc2/proyecto2/MIPS_CACHE_VHDL/" "adder32.vhd" "339700347bc18f946eeefaa852f84232f5009a57" "20260423101946.934":
+  entity adder32 at 20( 467) + 0 on 43;
+  architecture behavioral of adder32 at 39( 1059) + 0 on 44;
+file "/home/a838585/Desktop/aoc2/proyecto2/MIPS_CACHE_VHDL/" "ALU_2026.vhd" "3d2f7db4492935f454dd1a69c2b14151942367a6" "20260423101949.270":
+  entity alu_vector_mac at 11( 396) + 0 on 67;
+  architecture behavioral of alu_vector_mac at 32( 1283) + 0 on 68;
+file "/home/a838585/Desktop/aoc2/proyecto2/MIPS_CACHE_VHDL/" "AOC2_SoC_2026.vhd" "32127fe4d21672d44b18730cba8808104cb2a0ee" "20260423101942.944":
   entity aoc2_soc at 3( 24) + 2 on 13;
   architecture behavior of aoc2_soc at 17( 520) + 2 on 14;
-file "/home/a838585/Desktop/aoc2/proyecto1/MIPS_VHDL/" "Banco_EX.vhd" "d2f5d2dbe8455553cc7f412f3bc69c9ff3feadac" "20260406090059.426":
-  entity banco_ex at 20( 468) + 0 on 39;
-  architecture behavioral of banco_ex at 88( 3305) + 0 on 40;
-file "/home/a838585/Desktop/aoc2/proyecto1/MIPS_VHDL/" "Banco_ID.vhd" "4b30c86fced5724c430de9048302de6f07634b08" "20260406090058.590":
-  entity banco_id at 4( 285) + 0 on 27;
-  architecture behavioral of banco_id at 24( 1099) + 0 on 28;
-file "/home/a838585/Desktop/aoc2/proyecto1/MIPS_VHDL/" "Banco_MEM.vhd" "36f0cbb6a428ae99956d66eada1708b69ddec73c" "20260406090100.558":
-  entity banco_mem at 20( 469) + 0 on 51;
-  architecture behavioral of banco_mem at 68( 2435) + 0 on 52;
-file "/home/a838585/Desktop/aoc2/proyecto1/MIPS_VHDL/" "Banco_WB.vhd" "e27c268415510df08cff1d9f6d2889abd3e952ab" "20260406090100.913":
-  entity banco_wb at 20( 468) + 0 on 55;
-  architecture behavioral of banco_wb at 63( 2242) + 0 on 56;
-file "/home/a838585/Desktop/aoc2/proyecto1/MIPS_VHDL/" "bits_shifter.vhd" "362ee1646e3be8a012c0cf9d90672eac1a01f18b" "20260406090059.003":
-  entity two_bits_shifter at 20( 472) + 0 on 33;
-  architecture behavioral of two_bits_shifter at 37( 967) + 0 on 34;
-file "/home/a838585/Desktop/aoc2/proyecto1/MIPS_VHDL/" "BReg.vhd" "6b82654d078729329e4e6d9a57a764c7f5ecb616" "20260406090058.718":
-  entity breg at 20( 462) + 0 on 29;
-  architecture behavioral of breg at 49( 1477) + 0 on 30;
-file "/home/a838585/Desktop/aoc2/proyecto1/MIPS_VHDL/" "counter.vhd" "b1788ed66d2bff537c484539442e7a10b52d146c" "20260406090101.074":
-  entity counter at 20( 468) + 0 on 57;
-  architecture behavioral of counter at 46( 1225) + 0 on 58;
-file "/home/a838585/Desktop/aoc2/proyecto1/MIPS_VHDL/" "Exception_manager.vhd" "330bb218265bf18bd93781f8b5ebdc9dafb11d41" "20260406090100.753":
-  entity exception_manager at 6( 304) + 0 on 53;
-  architecture behavioral of exception_manager at 29( 1743) + 0 on 54;
-file "/home/a838585/Desktop/aoc2/proyecto1/MIPS_VHDL/" "Ext_signo.vhd" "b11f5e879147f908a59e9f31cb2a4293b2dcc753" "20260406090058.906":
-  entity ext_signo at 20( 469) + 0 on 31;
-  architecture behavioral of ext_signo at 37( 953) + 0 on 32;
-file "/home/a838585/Desktop/aoc2/proyecto1/MIPS_VHDL/" "INCOMPLETE_Mips_segmentado_IRQ_2026.vhd" "2d529875c6637ef6a649677d7d439b7acca73ff4" "20260406090057.496":
+file "/home/a838585/Desktop/aoc2/proyecto2/MIPS_CACHE_VHDL/" "arbitro.vhd" "0622d08d8c23520dd7c94367e7315fec51cb22b5" "20260423101944.980":
+  entity arbitro at 20( 484) + 0 on 25;
+  architecture behavioral of arbitro at 44( 1357) + 0 on 26;
+file "/home/a838585/Desktop/aoc2/proyecto2/MIPS_CACHE_VHDL/" "Banco_EX.vhd" "d2f5d2dbe8455553cc7f412f3bc69c9ff3feadac" "20260423101948.615":
+  entity banco_ex at 20( 468) + 0 on 59;
+  architecture behavioral of banco_ex at 88( 3305) + 0 on 60;
+file "/home/a838585/Desktop/aoc2/proyecto2/MIPS_CACHE_VHDL/" "Banco_ID.vhd" "4b30c86fced5724c430de9048302de6f07634b08" "20260423101947.266":
+  entity banco_id at 4( 285) + 0 on 47;
+  architecture behavioral of banco_id at 24( 1099) + 0 on 48;
+file "/home/a838585/Desktop/aoc2/proyecto2/MIPS_CACHE_VHDL/" "Banco_MEM.vhd" "36f0cbb6a428ae99956d66eada1708b69ddec73c" "20260423101949.820":
+  entity banco_mem at 20( 469) + 0 on 71;
+  architecture behavioral of banco_mem at 68( 2435) + 0 on 72;
+file "/home/a838585/Desktop/aoc2/proyecto2/MIPS_CACHE_VHDL/" "Banco_WB.vhd" "e27c268415510df08cff1d9f6d2889abd3e952ab" "20260423101950.265":
+  entity banco_wb at 20( 468) + 0 on 75;
+  architecture behavioral of banco_wb at 63( 2242) + 0 on 76;
+file "/home/a838585/Desktop/aoc2/proyecto2/MIPS_CACHE_VHDL/" "bits_shifter.vhd" "362ee1646e3be8a012c0cf9d90672eac1a01f18b" "20260423101947.836":
+  entity two_bits_shifter at 20( 472) + 0 on 53;
+  architecture behavioral of two_bits_shifter at 37( 967) + 0 on 54;
+file "/home/a838585/Desktop/aoc2/proyecto2/MIPS_CACHE_VHDL/" "BReg.vhd" "6b82654d078729329e4e6d9a57a764c7f5ecb616" "20260423101947.413":
+  entity breg at 20( 462) + 0 on 49;
+  architecture behavioral of breg at 49( 1477) + 0 on 50;
+file "/home/a838585/Desktop/aoc2/proyecto2/MIPS_CACHE_VHDL/" "Completar_UC_MC_2026.vhd" "054a4d8bdc52d9928a8a8048223c4d1dff881f19" "20260423101946.224":
+  entity uc_mc_cb at 20( 600) + 0 on 37;
+  architecture behavioral of uc_mc_cb at 82( 4764) + 0 on 38;
+file "/home/a838585/Desktop/aoc2/proyecto2/MIPS_CACHE_VHDL/" "counter_2bits.vhd" "0fc3f2cb6ca5db5c10947b0ce45d20cff2218e2e" "20260423101942.067":
+  entity counter_2bits at 20( 486) + 0 on 4;
+  architecture behavioral of counter_2bits at 34( 950) + 0 on 4;
+file "/home/a838585/Desktop/aoc2/proyecto2/MIPS_CACHE_VHDL/" "counter.vhd" "b1788ed66d2bff537c484539442e7a10b52d146c" "20260423101945.148":
+  entity counter at 20( 468) + 0 on 27;
+  architecture behavioral of counter at 46( 1225) + 0 on 28;
+file "/home/a838585/Desktop/aoc2/proyecto2/MIPS_CACHE_VHDL/" "Exception_manager.vhd" "330bb218265bf18bd93781f8b5ebdc9dafb11d41" "20260423101950.006":
+  entity exception_manager at 6( 304) + 0 on 73;
+  architecture behavioral of exception_manager at 29( 1743) + 0 on 74;
+file "/home/a838585/Desktop/aoc2/proyecto2/MIPS_CACHE_VHDL/" "Ext_signo.vhd" "b11f5e879147f908a59e9f31cb2a4293b2dcc753" "20260423101947.617":
+  entity ext_signo at 20( 469) + 0 on 51;
+  architecture behavioral of ext_signo at 37( 953) + 0 on 52;
+file "/home/a838585/Desktop/aoc2/proyecto2/MIPS_CACHE_VHDL/" "FIFO_reg.vhd" "05cf4847cc560ffcca35210b0249fba6811f815d" "20260423101946.035":
+  entity fifo_reg at 20( 481) + 0 on 35;
+  architecture behavioral of fifo_reg at 47( 1325) + 0 on 36;
+file "/home/a838585/Desktop/aoc2/proyecto2/MIPS_CACHE_VHDL/" "INCOMPLETE_Mips_segmentado_IRQ_2026.vhd" "2d529875c6637ef6a649677d7d439b7acca73ff4" "20260423101943.483":
   entity mips_segmentado at 13( 660) + 0 on 17;
   architecture behavioral of mips_segmentado at 32( 1438) + 0 on 18;
-file "/home/a838585/Desktop/aoc2/proyecto1/MIPS_VHDL/" "INCOMPLETE_UA_2026.vhd" "8f92513cd9a7ae1e511e7a2f8e0dc82794fb1ba2" "20260406090059.619":
-  entity ua at 1( 0) + 0 on 41;
-  architecture behavioral of ua at 20( 588) + 0 on 42;
-file "/home/a838585/Desktop/aoc2/proyecto1/MIPS_VHDL/" "INCOMPLETE_UC_Mips_2026.vhd" "2ff74be41c5332745a7b0b098feb4356559747f0" "20260406090059.112":
-  entity uc at 20( 488) + 0 on 35;
-  architecture behavioral of uc at 51( 1565) + 0 on 36;
-file "/home/a838585/Desktop/aoc2/proyecto1/MIPS_VHDL/" "INCOMPLETE_UD_2026.vhd" "bd0b847429b4b6308953855290152d5f4b504e38" "20260406090059.226":
-  entity ud at 1( 0) + 0 on 37;
-  architecture behavioral of ud at 32( 1795) + 0 on 38;
-file "/home/a838585/Desktop/aoc2/proyecto1/MIPS_VHDL/" "IO_MD_subsystem_2026.vhd" "ab1dbe4a7715995d7871ebcf7eb8622aa77ee7df" "20260406090057.201":
-  entity io_data_memory_subsystem at 20( 470) + 0 on 15;
-  architecture behavioral of io_data_memory_subsystem at 56( 2256) + 0 on 16;
-file "/home/a838585/Desktop/aoc2/proyecto1/MIPS_VHDL/" "mux2_1.vhd" "d95b3cf343dce0d39dff5738a8cc7903075df3df" "20260406090059.927":
-  entity mux2_1 at 20( 474) + 0 on 45;
-  architecture behavioral of mux2_1 at 39( 1031) + 0 on 46;
-file "/home/a838585/Desktop/aoc2/proyecto1/MIPS_VHDL/" "mux2_5bits.vhd" "e378e191a56a48c3078b0e33f1e5d42e9241f56f" "20260406090100.443":
-  entity mux2_5bits at 20( 470) + 0 on 49;
-  architecture behavioral of mux2_5bits at 39( 1030) + 0 on 50;
-file "/home/a838585/Desktop/aoc2/proyecto1/MIPS_VHDL/" "mux4_1.vhd" "8ac8b3465ff00ae263742658a09de84c9c17a985" "20260406090059.796":
-  entity mux4_1 at 20( 474) + 0 on 43;
-  architecture behavioral of mux4_1 at 41( 1157) + 0 on 44;
-file "/home/a838585/Desktop/aoc2/proyecto1/MIPS_VHDL/" "RAM_128_32_P1_tests_2026.vhd" "d6a20e89bad1d64093127aab6a990ef8ba688c2e" "20260406090058.071":
-  entity ram_128_32 at 20( 470) + 0 on 19;
-  architecture behavioral of ram_128_32 at 43( 1232) + 0 on 20;
-file "/home/a838585/Desktop/aoc2/proyecto1/MIPS_VHDL/" "RAM_I_test_exceptions_neuron_2026.vhd" "20aca2d197e6904e4a9537ab0a965d014177ded1" "20260406090058.459":
-  entity memoriaram_i at 13( 411) + 0 on 25;
-  architecture behavioral of memoriaram_i at 40( 1531) + 0 on 26;
-file "/home/a838585/Desktop/aoc2/proyecto1/MIPS_VHDL/" "REGISTER.vhd" "2d733fcd81d27ee7b7875863df0ffa6765588c20" "20260406090058.227":
-  entity reg at 2( 1) + 0 on 21;
-  architecture behavioral of reg at 15( 407) + 0 on 22;
-file "/home/a838585/Desktop/aoc2/proyecto1/MIPS_VHDL/" "testbench_AOC2_SoC_2026.vhd" "8ff26b51b282c359f29a9b68c913e99d1ad81f0f" "20260406090056.920":
-  entity testbench at 3( 24) + 2 on 11;
-  architecture behavior of testbench at 10( 140) + 2 on 12;
+file "/home/a838585/Desktop/aoc2/proyecto2/MIPS_CACHE_VHDL/" "INCOMPLETE_UA_2026.vhd" "8f92513cd9a7ae1e511e7a2f8e0dc82794fb1ba2" "20260423101948.838":
+  entity ua at 1( 0) + 0 on 61;
+  architecture behavioral of ua at 20( 588) + 0 on 62;
+file "/home/a838585/Desktop/aoc2/proyecto2/MIPS_CACHE_VHDL/" "INCOMPLETE_UC_Mips_2026.vhd" "2ff74be41c5332745a7b0b098feb4356559747f0" "20260423101948.109":
+  entity uc at 20( 488) + 0 on 55;
+  architecture behavioral of uc at 51( 1565) + 0 on 56;
+file "/home/a838585/Desktop/aoc2/proyecto2/MIPS_CACHE_VHDL/" "INCOMPLETE_UD_2026.vhd" "bd0b847429b4b6308953855290152d5f4b504e38" "20260423101948.347":
+  entity ud at 1( 0) + 0 on 57;
+  architecture behavioral of ud at 32( 1795) + 0 on 58;
+file "/home/a838585/Desktop/aoc2/proyecto2/MIPS_CACHE_VHDL/" "IO_master_2026.vhd" "43a3c4b1200fc712db3fccc5b118d594c9d7b631" "20260423101945.349":
+  entity io_master at 1( 0) + 0 on 29;
+  architecture behavioral of io_master at 24( 1244) + 0 on 30;
+file "/home/a838585/Desktop/aoc2/proyecto2/MIPS_CACHE_VHDL/" "IO_MD_subsystem_P2_26.vhd" "d88c983f16ff9e2739dcd1a1826b01a6a01b292a" "20260423101943.130":
+  entity io_data_memory_subsystem at 20( 489) + 0 on 15;
+  architecture behavioral of io_data_memory_subsystem at 57( 2512) + 0 on 16;
+file "/home/a838585/Desktop/aoc2/proyecto2/MIPS_CACHE_VHDL/" "MC_datos_CB_2026.vhd" "047176201a1c9cec7bf1b3d966503aea3dfe2e01" "20260423101944.082":
+  entity mc_datos_cb at 20( 634) + 0 on 19;
+  architecture behavioral of mc_datos_cb at 59( 2599) + 0 on 20;
+file "/home/a838585/Desktop/aoc2/proyecto2/MIPS_CACHE_VHDL/" "MD_cont_2026.vhd" "62c9081c533284dc57c09e18f19b83a066941d29" "20260423101944.438":
+  entity md_cont_2026 at 19( 398) + 0 on 21;
+  architecture behavioral of md_cont_2026 at 41( 1341) + 0 on 22;
+file "/home/a838585/Desktop/aoc2/proyecto2/MIPS_CACHE_VHDL/" "MD_scratch_2026.vhd" "5605d0c4696bd54dac4b2885018edf36352d4b1a" "20260423101944.725":
+  entity md_scratch at 19( 398) + 0 on 23;
+  architecture behavioral of md_scratch at 40( 1248) + 0 on 24;
+file "/home/a838585/Desktop/aoc2/proyecto2/MIPS_CACHE_VHDL/" "memoriaRAM_64_32_enable.vhd" "6eac88fc48db01c27a01cd07eef31b662a1f74de" "20260423101946.687":
+  entity ram_64_32 at 20( 489) + 0 on 41;
+  architecture behavioral of ram_64_32 at 44( 1359) + 0 on 42;
+file "/home/a838585/Desktop/aoc2/proyecto2/MIPS_CACHE_VHDL/" "mux2_1.vhd" "d95b3cf343dce0d39dff5738a8cc7903075df3df" "20260423101949.145":
+  entity mux2_1 at 20( 474) + 0 on 65;
+  architecture behavioral of mux2_1 at 39( 1031) + 0 on 66;
+file "/home/a838585/Desktop/aoc2/proyecto2/MIPS_CACHE_VHDL/" "mux2_5bits.vhd" "e378e191a56a48c3078b0e33f1e5d42e9241f56f" "20260423101949.682":
+  entity mux2_5bits at 20( 470) + 0 on 69;
+  architecture behavioral of mux2_5bits at 39( 1030) + 0 on 70;
+file "/home/a838585/Desktop/aoc2/proyecto2/MIPS_CACHE_VHDL/" "mux4_1.vhd" "8ac8b3465ff00ae263742658a09de84c9c17a985" "20260423101949.017":
+  entity mux4_1 at 20( 474) + 0 on 63;
+  architecture behavioral of mux4_1 at 41( 1157) + 0 on 64;
+file "/home/a838585/Desktop/aoc2/proyecto2/MIPS_CACHE_VHDL/" "RAM_128_32_P1_tests_2026.vhd" "a365c23f063d09e70760e6eb22cc9228d297db39" "20260423101946.472":
+  entity ram_128_32 at 20( 470) + 0 on 39;
+  architecture behavioral of ram_128_32 at 43( 1232) + 0 on 40;
+file "/home/a838585/Desktop/aoc2/proyecto2/MIPS_CACHE_VHDL/" "RAM_I_test_exceptions_neuron_2026.vhd" "1fc1d0f0b2d3d0760c509fdc797ffea71a16deb7" "20260423101947.077":
+  entity memoriaram_i at 13( 411) + 0 on 45;
+  architecture behavioral of memoriaram_i at 40( 1531) + 0 on 46;
+file "/home/a838585/Desktop/aoc2/proyecto2/MIPS_CACHE_VHDL/" "REGISTER.vhd" "2d733fcd81d27ee7b7875863df0ffa6765588c20" "20260423101945.532":
+  entity reg at 2( 1) + 0 on 31;
+  architecture behavioral of reg at 15( 407) + 0 on 32;
+file "/home/a838585/Desktop/aoc2/proyecto2/MIPS_CACHE_VHDL/" "testbench_AOC2_SoC.vhd" "4425ec521b521d816a349e3d2a05ef27d9a35808" "20260423101942.798":
+  entity testbench at 3( 26) + 2 on 11;
+  architecture behavior of testbench at 10( 149) + 2 on 12;
+file "/home/a838585/Desktop/aoc2/proyecto2/MIPS_CACHE_VHDL/" "Via_2026_CB.vhd" "dfc1466cd98617a8734426822fd411ac68cce502" "20260423101945.680":
+  entity via_cb at 1( 0) + 0 on 33;
+  architecture behavioral of via_cb at 25( 1303) + 0 on 34;

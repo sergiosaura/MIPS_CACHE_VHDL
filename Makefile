@@ -10,7 +10,7 @@ GHDLFLAGS= --ieee=synopsys -fexplicit --workdir=WORK
 all: testbench
 
 # Elaboration target
-testbench: /usr/local/ghdl/lib/ghdl/ieee/v93/std_logic_1164.o /usr/local/ghdl/lib/ghdl/ieee/v93/std_logic_1164-body.o /usr/local/ghdl/lib/ghdl/ieee/v93/numeric_std.o /usr/local/ghdl/lib/ghdl/ieee/v93/numeric_std-body.o WORK/testbench_AOC2_SoC_2026.o WORK/AOC2_SoC_2026.o /usr/local/ghdl/lib/ghdl/ieee/v93/std_logic_arith.o /usr/local/ghdl/lib/ghdl/ieee/v93/std_logic_unsigned.o WORK/IO_MD_subsystem_2026.o WORK/INCOMPLETE_Mips_segmentado_IRQ_2026.o WORK/RAM_128_32_P1_tests_2026.o WORK/REGISTER.o WORK/adder32.o WORK/RAM_I_test_exceptions_neuron_2026.o WORK/Banco_ID.o WORK/BReg.o WORK/Ext_signo.o WORK/bits_shifter.o WORK/INCOMPLETE_UC_Mips_2026.o WORK/INCOMPLETE_UD_2026.o WORK/Banco_EX.o WORK/INCOMPLETE_UA_2026.o WORK/mux4_1.o WORK/mux2_1.o WORK/ALU_2026.o WORK/mux2_5bits.o WORK/Banco_MEM.o WORK/Exception_manager.o WORK/Banco_WB.o WORK/counter.o
+testbench: /usr/local/ghdl/lib/ghdl/ieee/v93/std_logic_1164.o /usr/local/ghdl/lib/ghdl/ieee/v93/std_logic_1164-body.o /usr/local/ghdl/lib/ghdl/ieee/v93/numeric_std.o /usr/local/ghdl/lib/ghdl/ieee/v93/numeric_std-body.o WORK/testbench_AOC2_SoC.o WORK/AOC2_SoC_2026.o /usr/local/ghdl/lib/ghdl/ieee/v93/std_logic_arith.o /usr/local/ghdl/lib/ghdl/ieee/v93/std_logic_unsigned.o WORK/IO_MD_subsystem_P2_26.o WORK/INCOMPLETE_Mips_segmentado_IRQ_2026.o WORK/MC_datos_CB_2026.o WORK/MD_cont_2026.o WORK/MD_scratch_2026.o WORK/arbitro.o WORK/counter.o WORK/IO_master_2026.o WORK/REGISTER.o WORK/Via_2026_CB.o WORK/FIFO_reg.o WORK/Completar_UC_MC_2026.o WORK/RAM_128_32_P1_tests_2026.o WORK/memoriaRAM_64_32_enable.o WORK/adder32.o WORK/RAM_I_test_exceptions_neuron_2026.o WORK/Banco_ID.o WORK/BReg.o WORK/Ext_signo.o WORK/bits_shifter.o WORK/INCOMPLETE_UC_Mips_2026.o WORK/INCOMPLETE_UD_2026.o WORK/Banco_EX.o WORK/INCOMPLETE_UA_2026.o WORK/mux4_1.o WORK/mux2_1.o WORK/ALU_2026.o WORK/mux2_5bits.o WORK/Banco_MEM.o WORK/Exception_manager.o WORK/Banco_WB.o
 	$(GHDL) -e $(GHDLFLAGS) $@
 
 # Run target
@@ -30,7 +30,7 @@ run: testbench
 /usr/local/ghdl/lib/ghdl/ieee/v93/numeric_std-body.o: /usr/local/ghdl/lib/ghdl/ieee/v93/../../src/ieee/v93/numeric_std-body.vhdl
 	@echo "This file was not locally built ($<)"
 	exit 1
-WORK/testbench_AOC2_SoC_2026.o: testbench_AOC2_SoC_2026.vhd
+WORK/testbench_AOC2_SoC.o: testbench_AOC2_SoC.vhd
 	$(GHDL) -a $(GHDLFLAGS) $<
 WORK/AOC2_SoC_2026.o: AOC2_SoC_2026.vhd
 	$(GHDL) -a $(GHDLFLAGS) $<
@@ -40,13 +40,33 @@ WORK/AOC2_SoC_2026.o: AOC2_SoC_2026.vhd
 /usr/local/ghdl/lib/ghdl/ieee/v93/std_logic_unsigned.o: /usr/local/ghdl/lib/ghdl/ieee/v93/../../src/synopsys/std_logic_unsigned.vhdl
 	@echo "This file was not locally built ($<)"
 	exit 1
-WORK/IO_MD_subsystem_2026.o: IO_MD_subsystem_2026.vhd
+WORK/IO_MD_subsystem_P2_26.o: IO_MD_subsystem_P2_26.vhd
 	$(GHDL) -a $(GHDLFLAGS) $<
 WORK/INCOMPLETE_Mips_segmentado_IRQ_2026.o: INCOMPLETE_Mips_segmentado_IRQ_2026.vhd
 	$(GHDL) -a $(GHDLFLAGS) $<
-WORK/RAM_128_32_P1_tests_2026.o: RAM_128_32_P1_tests_2026.vhd
+WORK/MC_datos_CB_2026.o: MC_datos_CB_2026.vhd
+	$(GHDL) -a $(GHDLFLAGS) $<
+WORK/MD_cont_2026.o: MD_cont_2026.vhd
+	$(GHDL) -a $(GHDLFLAGS) $<
+WORK/MD_scratch_2026.o: MD_scratch_2026.vhd
+	$(GHDL) -a $(GHDLFLAGS) $<
+WORK/arbitro.o: arbitro.vhd
+	$(GHDL) -a $(GHDLFLAGS) $<
+WORK/counter.o: counter.vhd
+	$(GHDL) -a $(GHDLFLAGS) $<
+WORK/IO_master_2026.o: IO_master_2026.vhd
 	$(GHDL) -a $(GHDLFLAGS) $<
 WORK/REGISTER.o: REGISTER.vhd
+	$(GHDL) -a $(GHDLFLAGS) $<
+WORK/Via_2026_CB.o: Via_2026_CB.vhd
+	$(GHDL) -a $(GHDLFLAGS) $<
+WORK/FIFO_reg.o: FIFO_reg.vhd
+	$(GHDL) -a $(GHDLFLAGS) $<
+WORK/Completar_UC_MC_2026.o: Completar_UC_MC_2026.vhd
+	$(GHDL) -a $(GHDLFLAGS) $<
+WORK/RAM_128_32_P1_tests_2026.o: RAM_128_32_P1_tests_2026.vhd
+	$(GHDL) -a $(GHDLFLAGS) $<
+WORK/memoriaRAM_64_32_enable.o: memoriaRAM_64_32_enable.vhd
 	$(GHDL) -a $(GHDLFLAGS) $<
 WORK/adder32.o: adder32.vhd
 	$(GHDL) -a $(GHDLFLAGS) $<
@@ -82,22 +102,30 @@ WORK/Exception_manager.o: Exception_manager.vhd
 	$(GHDL) -a $(GHDLFLAGS) $<
 WORK/Banco_WB.o: Banco_WB.vhd
 	$(GHDL) -a $(GHDLFLAGS) $<
-WORK/counter.o: counter.vhd
-	$(GHDL) -a $(GHDLFLAGS) $<
 
 # Files dependences
 /usr/local/ghdl/lib/ghdl/ieee/v93/std_logic_1164.o: 
 /usr/local/ghdl/lib/ghdl/ieee/v93/std_logic_1164-body.o:  /usr/local/ghdl/lib/ghdl/ieee/v93/std_logic_1164.o
 /usr/local/ghdl/lib/ghdl/ieee/v93/numeric_std.o:  /usr/local/ghdl/lib/ghdl/ieee/v93/std_logic_1164.o
 /usr/local/ghdl/lib/ghdl/ieee/v93/numeric_std-body.o:  /usr/local/ghdl/lib/ghdl/ieee/v93/numeric_std.o
-WORK/testbench_AOC2_SoC_2026.o:  /usr/local/ghdl/lib/ghdl/ieee/v93/std_logic_1164.o /usr/local/ghdl/lib/ghdl/ieee/v93/std_logic_1164-body.o /usr/local/ghdl/lib/ghdl/ieee/v93/numeric_std.o /usr/local/ghdl/lib/ghdl/ieee/v93/numeric_std-body.o
+WORK/testbench_AOC2_SoC.o:  /usr/local/ghdl/lib/ghdl/ieee/v93/std_logic_1164.o /usr/local/ghdl/lib/ghdl/ieee/v93/std_logic_1164-body.o /usr/local/ghdl/lib/ghdl/ieee/v93/numeric_std.o /usr/local/ghdl/lib/ghdl/ieee/v93/numeric_std-body.o
 WORK/AOC2_SoC_2026.o:  /usr/local/ghdl/lib/ghdl/ieee/v93/std_logic_1164.o /usr/local/ghdl/lib/ghdl/ieee/v93/numeric_std.o
 /usr/local/ghdl/lib/ghdl/ieee/v93/std_logic_arith.o:  /usr/local/ghdl/lib/ghdl/ieee/v93/std_logic_1164.o
 /usr/local/ghdl/lib/ghdl/ieee/v93/std_logic_unsigned.o:  /usr/local/ghdl/lib/ghdl/ieee/v93/std_logic_1164.o /usr/local/ghdl/lib/ghdl/ieee/v93/std_logic_arith.o
-WORK/IO_MD_subsystem_2026.o:  /usr/local/ghdl/lib/ghdl/ieee/v93/std_logic_1164.o /usr/local/ghdl/lib/ghdl/ieee/v93/std_logic_unsigned.o
+WORK/IO_MD_subsystem_P2_26.o:  /usr/local/ghdl/lib/ghdl/ieee/v93/std_logic_1164.o /usr/local/ghdl/lib/ghdl/ieee/v93/std_logic_unsigned.o
 WORK/INCOMPLETE_Mips_segmentado_IRQ_2026.o:  /usr/local/ghdl/lib/ghdl/ieee/v93/std_logic_1164.o
-WORK/RAM_128_32_P1_tests_2026.o:  /usr/local/ghdl/lib/ghdl/ieee/v93/std_logic_1164.o /usr/local/ghdl/lib/ghdl/ieee/v93/std_logic_unsigned.o /usr/local/ghdl/lib/ghdl/ieee/v93/numeric_std.o
+WORK/MC_datos_CB_2026.o:  /usr/local/ghdl/lib/ghdl/ieee/v93/std_logic_1164.o /usr/local/ghdl/lib/ghdl/ieee/v93/std_logic_unsigned.o /usr/local/ghdl/lib/ghdl/ieee/v93/numeric_std.o
+WORK/MD_cont_2026.o:  /usr/local/ghdl/lib/ghdl/ieee/v93/std_logic_1164.o /usr/local/ghdl/lib/ghdl/ieee/v93/std_logic_arith.o /usr/local/ghdl/lib/ghdl/ieee/v93/std_logic_unsigned.o
+WORK/MD_scratch_2026.o:  /usr/local/ghdl/lib/ghdl/ieee/v93/std_logic_1164.o /usr/local/ghdl/lib/ghdl/ieee/v93/std_logic_arith.o /usr/local/ghdl/lib/ghdl/ieee/v93/std_logic_unsigned.o
+WORK/arbitro.o:  /usr/local/ghdl/lib/ghdl/ieee/v93/std_logic_1164.o
+WORK/counter.o:  /usr/local/ghdl/lib/ghdl/ieee/v93/std_logic_1164.o /usr/local/ghdl/lib/ghdl/ieee/v93/std_logic_arith.o /usr/local/ghdl/lib/ghdl/ieee/v93/std_logic_unsigned.o /usr/local/ghdl/lib/ghdl/ieee/v93/numeric_std.o
+WORK/IO_master_2026.o:  /usr/local/ghdl/lib/ghdl/ieee/v93/std_logic_1164.o
 WORK/REGISTER.o:  /usr/local/ghdl/lib/ghdl/ieee/v93/std_logic_1164.o /usr/local/ghdl/lib/ghdl/ieee/v93/numeric_std.o
+WORK/Via_2026_CB.o:  /usr/local/ghdl/lib/ghdl/ieee/v93/std_logic_1164.o /usr/local/ghdl/lib/ghdl/ieee/v93/std_logic_unsigned.o /usr/local/ghdl/lib/ghdl/ieee/v93/numeric_std.o
+WORK/FIFO_reg.o:  /usr/local/ghdl/lib/ghdl/ieee/v93/std_logic_1164.o /usr/local/ghdl/lib/ghdl/ieee/v93/numeric_std.o /usr/local/ghdl/lib/ghdl/ieee/v93/std_logic_unsigned.o
+WORK/Completar_UC_MC_2026.o:  /usr/local/ghdl/lib/ghdl/ieee/v93/std_logic_1164.o
+WORK/RAM_128_32_P1_tests_2026.o:  /usr/local/ghdl/lib/ghdl/ieee/v93/std_logic_1164.o /usr/local/ghdl/lib/ghdl/ieee/v93/std_logic_unsigned.o /usr/local/ghdl/lib/ghdl/ieee/v93/numeric_std.o
+WORK/memoriaRAM_64_32_enable.o:  /usr/local/ghdl/lib/ghdl/ieee/v93/std_logic_1164.o /usr/local/ghdl/lib/ghdl/ieee/v93/std_logic_unsigned.o /usr/local/ghdl/lib/ghdl/ieee/v93/numeric_std.o
 WORK/adder32.o:  /usr/local/ghdl/lib/ghdl/ieee/v93/std_logic_1164.o /usr/local/ghdl/lib/ghdl/ieee/v93/std_logic_arith.o /usr/local/ghdl/lib/ghdl/ieee/v93/std_logic_unsigned.o /usr/local/ghdl/lib/ghdl/ieee/v93/numeric_std.o
 WORK/RAM_I_test_exceptions_neuron_2026.o:  /usr/local/ghdl/lib/ghdl/ieee/v93/std_logic_1164.o /usr/local/ghdl/lib/ghdl/ieee/v93/std_logic_unsigned.o
 WORK/Banco_ID.o:  /usr/local/ghdl/lib/ghdl/ieee/v93/std_logic_1164.o
@@ -115,4 +143,3 @@ WORK/mux2_5bits.o:  /usr/local/ghdl/lib/ghdl/ieee/v93/std_logic_1164.o
 WORK/Banco_MEM.o:  /usr/local/ghdl/lib/ghdl/ieee/v93/std_logic_1164.o
 WORK/Exception_manager.o:  /usr/local/ghdl/lib/ghdl/ieee/v93/std_logic_1164.o
 WORK/Banco_WB.o:  /usr/local/ghdl/lib/ghdl/ieee/v93/std_logic_1164.o
-WORK/counter.o:  /usr/local/ghdl/lib/ghdl/ieee/v93/std_logic_1164.o /usr/local/ghdl/lib/ghdl/ieee/v93/std_logic_arith.o /usr/local/ghdl/lib/ghdl/ieee/v93/std_logic_unsigned.o /usr/local/ghdl/lib/ghdl/ieee/v93/numeric_std.o
