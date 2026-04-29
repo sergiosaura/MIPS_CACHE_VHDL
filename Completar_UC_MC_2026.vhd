@@ -161,7 +161,7 @@ Mem_ERROR <= '1' when (error_state = memory_error) else '0';
     next_state <= state;  
 	count_enable <= '0';
 	Frame <= '0';
-	  <= '0';
+	block_addr <= '0';
 	inc_m <= '0';
 	inc_w <= '0';
 	inc_r <= '0';
@@ -216,7 +216,7 @@ Mem_ERROR <= '1' when (error_state = memory_error) else '0';
 					MC_WE1 <= '1';
 				end if;
 			elsif (((RE= '1') or (WE= '1')) and (hit='0') and (addr_non_cacheable='1')) then  --fallo de lectura y escritura o no cacheable
-				next_state <= Arbitro
+				next_state <= Arbitro;
 			end if;
 
         when Arbitro =>
@@ -230,24 +230,32 @@ Mem_ERROR <= '1' when (error_state = memory_error) else '0';
 			end if;
 
 		when ADDR => -- Estado para derivar segun la operación que sea, prepara el bus para enviar lo que sea necesario
-			Frame = '1'; -- Ocupo el bus, digo que estoy "trabajando"
+			Frame <= '1'; -- Ocupo el bus, digo que estoy "trabajando"
 			MC_send_addr_ctrl <= '1'; -- Poner la dirección para acceder en el bus
 			MC_bus_Read <= RE; -- Para saber si estoy leyendo
 			MC_bus_Write <= WE; -- Para saber si estoy escribiendo
+
 		    if Bus_DevSel = '0' then -- Nadie encontro la dirección en su memoria
 				next_state <= Inicio;
 				ready <= '1';
 				next_error_state <= memory_error; --�ltima direcci�n incorrecta (no alineada)
 				load_addr_error <= '1';
+				
 			elsif (addr_non_cacheable = '1') then -- Scratch: Direccion de datos no cacheable
 				next_state <= Scratch; 
 				-- Es una palabra block_addr <= '0';
+
 			elsif (RE = '1' and dirty_bit_rpl = '0') then -- FETCH: Fallo de lectura, cacheable y bloque no esta sucio, faltaria pero ya se tiene en cuenta: addr_non_cacheable = '0', hit='0', internal_addr = '0' y unaligned = '0'
 				next_state <= Fetch;
 				block_addr <= '1'; -- Se lee bloque (solo se activa una vez recortando el send_addr, poniendo a 0 los 2 bits que indentifican la palabra)
+
 			elsif (RE = '1' and dirty_bit_rpl = '1') then -- CopyBack: Fallo de lectura, cacheable y bloque esta sucio, faltaria pero ya se tiene en cuenta: addr_non_cacheable = '0', hit='0', internal_addr = '0' y unaligned = '0'
-				next_state <= CopyBack;
+				send_dirty <= '1';
+				MC_bus_Read <= '0'; -- Para saber si estoy leyendo
+				MC_bus_Write <= '1'; -- Para saber si estoy escribiendo
 				block_addr <= '1'; -- Se lee bloque (solo se activa una vez recortando el send_addr, poniendo a 0 los 2 bits que indentifican la palabra)
+				next_state <= CopyBack;
+
 			elsif (WE = '1') then -- WriteAround: Escribir en MD (Memoria principal), faltaria pero ya se tiene en cuenta: addr_non_cacheable = '0', hit='0', internal_addr = '0' y unaligned = '0'
 				next_state <= WriteAround;
 				-- Es una palabra block_addr <= '0'; En este caso porque al escribir en memoria principal no se escribe todo el bloque, solo hay que escribir una palabra directamente en MD (MP).
@@ -256,6 +264,7 @@ Mem_ERROR <= '1' when (error_state = memory_error) else '0';
 		when Fetch =>	    
 			Frame <= '1'; -- Ocupo el bus, digo que estoy "trabajando"
 			MC_bus_Read <= '1';
+			mux_origen <= '1'; -- Indexamos la palabra a escribir por el contador para el bloque de cache
 
 			if bus_TRDY = '0' then -- Si la palabra de la memoria no esta lista en el bus -> Bucle 
 				next_state <= Fetch;
@@ -288,13 +297,25 @@ Mem_ERROR <= '1' when (error_state = memory_error) else '0';
 
 		when CopyBack =>
 		    Frame = '1'; -- Ocupo el bus, digo que estoy "trabajando"
+			MC_bus_Write <= '1'; -- Le paso palabra a palabra al bus el bloque sucio
+			MC_send_data <= '1'; -- Se indica a la MC que tiene que pasar el dato
+			mux_origen <= '1'; -- Enviar la palabra indexada por el contador a memoria principal
 
 			if bus_TRDY = '0' then -- Si la palabra de la memoria no esta lista en el bus -> Bucle 
 				next_state <= CopyBack;
-			elsif last_word_block = '0' then -- Fallara hasta que lea todo el bloque (debe fallar 3 veces por las 3 palabras y a la cuarta palabra dara acierto)
+
+			elsif last_word_block = '0' then -- Sacara 0 hasta que lea todo el bloque (debe dar 0 3 veces por las 3 palabras y a la cuarta palabra dara acierto)
 				next_state <= CopyBack;
+				count_enable <= '1'; -- Aumentar contador de palabra, se reinicia por un overflow que hace que de 11 cambie a 00
+
 			else -- Traer el bloque
-				next_state <= Fetch; -- El Frame se pondra a 0 en inicio
+			    count_enable <= '1'; -- Reiniciar contador
+				last_word <= '1'; -- Decir que es la ultima palabra
+				Update_dirty <= '1'; -- Se limpia el bit sucio del bloque
+				-- Como update_dirty esta habilitado poner el bit de dirty a 0, lo hace en esta linea de la via: 
+				-- dirty_bits_in 	<= set_clean_mask when (Block_copied_back ='1'), usa un mas máscara para limpiar ese bit
+				Block_copied_back <= '1'; 
+				next_state <= ADDR; -- El Frame se pondra a 0 en inicio
 			end if;
 
 		when WriteAround =>
