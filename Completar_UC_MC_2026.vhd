@@ -319,12 +319,17 @@ Mem_ERROR <= '1' when (error_state = memory_error) else '0';
 			end if;
 
 		when WriteAround =>
-			 Frame = '1'; -- Ocupo el bus, digo que estoy "trabajando"
+			Frame = '1'; -- Ocupo el bus, digo que estoy "trabajando"
+			MC_bus_Write <= '1'; -- Le paso palabra a palabra al bus el bloque sucio
+			MC_send_data <= '1'; -- Se indica a la MC que tiene que pasar el dato
+
 			if bus_TRDY = '0' then -- Si la palabra de la memoria no esta lista en el bus -> Bucle 
 				next_state <= WriteAround;
-			elsif last_word_block = '0' then -- Fallara hasta que lea todo el bloque (debe fallar 3 veces por las 3 palabras y a la cuarta palabra dara acierto)
-				next_state <= WriteAround;
 			else -- Traer el bloque
+				-- Aunque sea solo una palabra se pone porque last_word porque la maquina de estados de MD necesita esa condicion
+				-- para terminar el proceso de escritura en ella
+				last_word <= '1'; -- Decir que es la ultima palabra 
+				ready <= '1'; -- Se pone ready a uno ya que no hara hit en cache cuando pase a Inicio
 				next_state <= Inicio; -- El Frame se pondra a 0 en inicio
 			end if;
 
