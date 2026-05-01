@@ -56,7 +56,7 @@ entity UC_MC_CB is
 			-- se�ales para los contadores de rendimiento de la MC
 			inc_m : out STD_LOGIC; -- indica que ha habido un fallo en MC
 			inc_w : out STD_LOGIC; -- indica que ha habido una escritura en MC
-			inc_r : out STD_LOGIC; -- indica que ha habido una escritura en MC
+			inc_r : out STD_LOGIC; -- indica que ha habido una lectura en MC
 			inc_cb :out STD_LOGIC; -- indica que ha habido un reemplazo sucio en MC
 			-- Gesti�n de errores
 			unaligned: in STD_LOGIC; --indica que la direcci�n solicitada por el MIPS no est� alineada
@@ -92,7 +92,7 @@ component counter is
 					  );
 end component;		           
 -- Ejemplos de nombres de estado. No hay que usar estos. Nombrad a vuestros estados con nombres descriptivos. As� se facilita la depuraci�n
-type state_type is (Inicio, single_word_transfer_addr, read_block, write_dirty_block, single_word_transfer_data, block_transfer_addr, block_transfer_data, Send_Addr, Send_ADDR_CB, fallo, CopyBack, bajar_Frame); 
+type state_type is (Inicio, Arbitro, ADDR, Scratch, Fetch, WriteAround, single_word_transfer_addr, read_block, write_dirty_block, single_word_transfer_data, block_transfer_addr, block_transfer_data, Send_Addr, Send_ADDR_CB, fallo, CopyBack, bajar_Frame); 
 type error_type is (memory_error, No_error); 
 signal state, next_state : state_type; 
 signal error_state, next_error_state : error_type; 
@@ -216,6 +216,7 @@ Mem_ERROR <= '1' when (error_state = memory_error) else '0';
 					MC_WE1 <= '1';
 				end if;
 			elsif (((RE= '1') or (WE= '1')) and (hit='0') and (addr_non_cacheable='1')) then  --fallo de lectura y escritura o no cacheable
+				inc_m <= '1';
 				next_state <= Arbitro;
 			end if;
 
@@ -296,7 +297,7 @@ Mem_ERROR <= '1' when (error_state = memory_error) else '0';
 			end if;
 
 		when CopyBack =>
-		    Frame = '1'; -- Ocupo el bus, digo que estoy "trabajando"
+		    Frame <= '1'; -- Ocupo el bus, digo que estoy "trabajando"
 			MC_bus_Write <= '1'; -- Le paso palabra a palabra al bus el bloque sucio
 			MC_send_data <= '1'; -- Se indica a la MC que tiene que pasar el dato
 			mux_origen <= '1'; -- Enviar la palabra indexada por el contador a memoria principal
@@ -315,11 +316,12 @@ Mem_ERROR <= '1' when (error_state = memory_error) else '0';
 				-- Como update_dirty esta habilitado poner el bit de dirty a 0, lo hace en esta linea de la via: 
 				-- dirty_bits_in 	<= set_clean_mask when (Block_copied_back ='1'), usa un mas máscara para limpiar ese bit
 				Block_copied_back <= '1'; 
+				inc_cb <= '1'; -- Contador copy back
 				next_state <= ADDR; -- El Frame se pondra a 0 en inicio
 			end if;
 
 		when WriteAround =>
-			Frame = '1'; -- Ocupo el bus, digo que estoy "trabajando"
+			Frame <= '1'; -- Ocupo el bus, digo que estoy "trabajando"
 			MC_bus_Write <= '1'; -- Le paso palabra a palabra al bus el bloque sucio
 			MC_send_data <= '1'; -- Se indica a la MC que tiene que pasar el dato
 
@@ -334,10 +336,22 @@ Mem_ERROR <= '1' when (error_state = memory_error) else '0';
 			end if;
 
 		when Scratch =>
-			 Frame = '1'; -- Ocupo el bus, digo que estoy "trabajando"
+		    -- El devSel se pone a 1 para scratch ya que esta dentro del rango que eso se hace con su señal addr_in_range y el frame esta a 1
+			Frame <= '1'; -- Ocupo el bus, digo que estoy "trabajando"
+			MC_bus_Read <= RE; -- Para saber si estoy leyendo
+			MC_bus_Write <= WE; -- Para saber si estoy escribiendo
+			MC_send_data <= WE;
+
 			if bus_TRDY = '0' then -- Si la palabra de la memoria no esta lista en el bus -> Bucle 
 				next_state <= Scratch;
 			else -- Traer el bloque
+				
+				if RE = '1' then
+					mux_output <= "01"; -- La salida es un registro interno de la MC
+				end if;
+
+				last_word <= '1'; -- Decir que es la ultima palabra 
+				ready <= '1';
 				next_state <= Inicio; -- El Frame se pondra a 0 en inicio
 			end if;
 
