@@ -192,6 +192,7 @@ Mem_ERROR <= '1' when (error_state = memory_error) else '0';
 		    elsif (RE= '1' and  internal_addr ='1') then -- si quieren leer un registro de la MC se lo mandamos
 		    	next_state <= Inicio;
 				ready <= '1';
+				inc_r <= '1'; -- se lee la MC ¿se pone?
 				mux_output <= "10"; -- La salida es un registro interno de la MC
 				next_error_state <= No_error; --Cuando se lee el registro interno el controlador quita la se�al de error
 			elsif (WE = '1'  and  internal_addr ='1') then -- si quieren escribir en el registro interno de la MC se genera un error porque es s�lo de lectura
@@ -199,6 +200,8 @@ Mem_ERROR <= '1' when (error_state = memory_error) else '0';
 				ready <= '1';
 				next_error_state <= memory_error; --�ltima direcci�n incorrecta (intento de escritura en registro de lectura)
 				load_addr_error <= '1';
+			elsif (((RE= '1') or (WE= '1')) and (addr_non_cacheable='1')) then  --fallo de lectura y escritura o no cacheable
+				next_state <= Arbitro;
 			elsif (RE= '1' and  hit='1') then -- si piden y es acierto de lectura mandamos el dato
 		        next_state <= Inicio;
 				ready <= '1';
@@ -215,9 +218,10 @@ Mem_ERROR <= '1' when (error_state = memory_error) else '0';
 				else
 					MC_WE1 <= '1';
 				end if;
-			elsif (((RE= '1') or (WE= '1')) and (hit='0') and (addr_non_cacheable='1')) then  --fallo de lectura y escritura o no cacheable
+			elsif (((RE= '1') or (WE= '1')) and (hit='0')) then  --fallo de lectura y escritura o no cacheable
 				inc_m <= '1';
 				next_state <= Arbitro;
+				
 			end if;
 
         when Arbitro =>
