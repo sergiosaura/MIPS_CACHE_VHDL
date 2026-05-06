@@ -239,7 +239,10 @@ COMPONENT Banco_EX
 		   reset : in  STD_LOGIC;
 		   ready : out STD_LOGIC; --initially is always '1', but if ALU supports multicycle ops, it will be cero when the output is not ready
            ALUctrl : in  STD_LOGIC_VECTOR (2 downto 0); -- Ops: "000" add, "001" sub, "010" AND, "011" OR, "100" MAC with internal acc, "101" MAC without previous acc.
-           Dout : out  STD_LOGIC_VECTOR (31 downto 0)); -- Output
+           Dout : out  STD_LOGIC_VECTOR (31 downto 0); -- Output
+           -- Shadow ACC register for exception handling
+           Exception_accepted : in STD_LOGIC;
+           RTE_restore : in STD_LOGIC);
     END COMPONENT;
 	 
 	component mux2_5bits is
@@ -561,7 +564,8 @@ begin
 	muxALU_src: mux2_1 port map (Din0 => Mux_B_out, DIn1 => inm_ext_EX, ctrl => ALUSrc_EX, Dout => ALU_Src_out);
 	
 	--reset is currentlly unused in the ALU, but it will be needed if it becomes multicycle
-	ALU_MIPs: ALU_Vector_MAC PORT MAP ( clk => clk, reset => reset_EX, valid_I_EX => valid_I_EX, DA => Mux_A_out, DB => ALU_Src_out, ALUctrl => ALUctrl_EX, Dout => ALU_out_EX, ready => ALU_ready);
+	ALU_MIPs: ALU_Vector_MAC PORT MAP ( clk => clk, reset => reset_EX, valid_I_EX => valid_I_EX, DA => Mux_A_out, DB => ALU_Src_out, ALUctrl => ALUctrl_EX, Dout => ALU_out_EX, ready => ALU_ready,
+										Exception_accepted => Exception_accepted, RTE_restore => RTE_EX);
 	
 	
 	mux_dst: mux2_5bits port map (Din0 => Reg_Rt_EX, DIn1 => Reg_Rd_EX, ctrl => RegDst_EX, Dout => RW_EX);

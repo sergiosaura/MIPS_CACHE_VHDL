@@ -1,0 +1,94 @@
+[*]
+[*] GTKWave Analyzer v3.3.116 (w)1999-2023 BSI
+[*] Mon Apr  6 23:38:26 2026
+[*]
+[dumpfile] "/home/a2/Documents/aoc2/MIPS_VHDL/testbench.ghw"
+[dumpfile_mtime] "Mon Apr  6 23:38:10 2026"
+[dumpfile_size] 280963
+[savefile] "/home/a2/Documents/aoc2/MIPS_VHDL/asm_test/default_irq_signals.gtkw"
+[timestart] 0
+[size] 1918 1130
+[pos] -963 -6
+*-24.563002 34500000 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1
+[treeopen] top.
+[treeopen] top.testbench.
+[treeopen] top.testbench.uut.
+[treeopen] top.testbench.uut.mips_core.
+[treeopen] top.testbench.uut.mips_core.exception_mng.
+[treeopen] top.testbench.uut.mips_core.exception_mng.exception_lr.
+[treeopen] top.testbench.uut.mips_core.exception_mng.status_reg.
+[sst_width] 273
+[signals_width] 173
+[sst_expanded] 1
+[sst_vpaned_height] 347
+@28
+top.testbench.reset
+top.testbench.clk
+@c00024
++{pc} #{top.testbench.uut.mips_core.pc.data[31:0]} top.testbench.uut.mips_core.pc.data[31] top.testbench.uut.mips_core.pc.data[30] top.testbench.uut.mips_core.pc.data[29] top.testbench.uut.mips_core.pc.data[28] top.testbench.uut.mips_core.pc.data[27] top.testbench.uut.mips_core.pc.data[26] top.testbench.uut.mips_core.pc.data[25] top.testbench.uut.mips_core.pc.data[24] top.testbench.uut.mips_core.pc.data[23] top.testbench.uut.mips_core.pc.data[22] top.testbench.uut.mips_core.pc.data[21] top.testbench.uut.mips_core.pc.data[20] top.testbench.uut.mips_core.pc.data[19] top.testbench.uut.mips_core.pc.data[18] top.testbench.uut.mips_core.pc.data[17] top.testbench.uut.mips_core.pc.data[16] top.testbench.uut.mips_core.pc.data[15] top.testbench.uut.mips_core.pc.data[14] top.testbench.uut.mips_core.pc.data[13] top.testbench.uut.mips_core.pc.data[12] top.testbench.uut.mips_core.pc.data[11] top.testbench.uut.mips_core.pc.data[10] top.testbench.uut.mips_core.pc.data[9] top.testbench.uut.mips_core.pc.data[8] top.testbench.uut.mips_core.pc.data[7] top.testbench.uut.mips_core.pc.data[6] top.testbench.uut.mips_core.pc.data[5] top.testbench.uut.mips_core.pc.data[4] top.testbench.uut.mips_core.pc.data[3] top.testbench.uut.mips_core.pc.data[2] top.testbench.uut.mips_core.pc.data[1] top.testbench.uut.mips_core.pc.data[0]
+@28
+top.testbench.uut.mips_core.pc.data[31]
+top.testbench.uut.mips_core.pc.data[30]
+top.testbench.uut.mips_core.pc.data[29]
+top.testbench.uut.mips_core.pc.data[28]
+top.testbench.uut.mips_core.pc.data[27]
+top.testbench.uut.mips_core.pc.data[26]
+top.testbench.uut.mips_core.pc.data[25]
+top.testbench.uut.mips_core.pc.data[24]
+top.testbench.uut.mips_core.pc.data[23]
+top.testbench.uut.mips_core.pc.data[22]
+top.testbench.uut.mips_core.pc.data[21]
+top.testbench.uut.mips_core.pc.data[20]
+top.testbench.uut.mips_core.pc.data[19]
+top.testbench.uut.mips_core.pc.data[18]
+top.testbench.uut.mips_core.pc.data[17]
+top.testbench.uut.mips_core.pc.data[16]
+top.testbench.uut.mips_core.pc.data[15]
+top.testbench.uut.mips_core.pc.data[14]
+top.testbench.uut.mips_core.pc.data[13]
+top.testbench.uut.mips_core.pc.data[12]
+top.testbench.uut.mips_core.pc.data[11]
+top.testbench.uut.mips_core.pc.data[10]
+top.testbench.uut.mips_core.pc.data[9]
+top.testbench.uut.mips_core.pc.data[8]
+top.testbench.uut.mips_core.pc.data[7]
+top.testbench.uut.mips_core.pc.data[6]
+top.testbench.uut.mips_core.pc.data[5]
+top.testbench.uut.mips_core.pc.data[4]
+top.testbench.uut.mips_core.pc.data[3]
+top.testbench.uut.mips_core.pc.data[2]
+top.testbench.uut.mips_core.pc.data[1]
+top.testbench.uut.mips_core.pc.data[0]
+@1401200
+-group_end
+@22
+[color] 3
++{mips_output} #{top.testbench.uut.io_output[31:0]} top.testbench.uut.io_output[31] top.testbench.uut.io_output[30] top.testbench.uut.io_output[29] top.testbench.uut.io_output[28] top.testbench.uut.io_output[27] top.testbench.uut.io_output[26] top.testbench.uut.io_output[25] top.testbench.uut.io_output[24] top.testbench.uut.io_output[23] top.testbench.uut.io_output[22] top.testbench.uut.io_output[21] top.testbench.uut.io_output[20] top.testbench.uut.io_output[19] top.testbench.uut.io_output[18] top.testbench.uut.io_output[17] top.testbench.uut.io_output[16] top.testbench.uut.io_output[15] top.testbench.uut.io_output[14] top.testbench.uut.io_output[13] top.testbench.uut.io_output[12] top.testbench.uut.io_output[11] top.testbench.uut.io_output[10] top.testbench.uut.io_output[9] top.testbench.uut.io_output[8] top.testbench.uut.io_output[7] top.testbench.uut.io_output[6] top.testbench.uut.io_output[5] top.testbench.uut.io_output[4] top.testbench.uut.io_output[3] top.testbench.uut.io_output[2] top.testbench.uut.io_output[1] top.testbench.uut.io_output[0]
+@28
+top.testbench.uut.mips_core.stall_mips
+top.testbench.uut.mips_core.stall_id
+top.testbench.uut.mips_core.kill_if
+@22
+[color] 3
++{op_code} #{top.testbench.uut.mips_core.unidad_detencion_riesgos.ir_op_code[5:0]} top.testbench.uut.mips_core.unidad_detencion_riesgos.ir_op_code[5] top.testbench.uut.mips_core.unidad_detencion_riesgos.ir_op_code[4] top.testbench.uut.mips_core.unidad_detencion_riesgos.ir_op_code[3] top.testbench.uut.mips_core.unidad_detencion_riesgos.ir_op_code[2] top.testbench.uut.mips_core.unidad_detencion_riesgos.ir_op_code[1] top.testbench.uut.mips_core.unidad_detencion_riesgos.ir_op_code[0]
+@28
+top.testbench.uut.mips_core.unidad_detencion_riesgos.valid_i_id
+top.testbench.uut.mips_core.unidad_detencion_riesgos.valid_i_ex
+top.testbench.uut.mips_core.unidad_detencion_riesgos.valid_i_mem
+@24
+[color] 3
++{cycles} #{top.testbench.uut.mips_core.cont_cycles.count_int[15:0]} top.testbench.uut.mips_core.cont_cycles.count_int[15] top.testbench.uut.mips_core.cont_cycles.count_int[14] top.testbench.uut.mips_core.cont_cycles.count_int[13] top.testbench.uut.mips_core.cont_cycles.count_int[12] top.testbench.uut.mips_core.cont_cycles.count_int[11] top.testbench.uut.mips_core.cont_cycles.count_int[10] top.testbench.uut.mips_core.cont_cycles.count_int[9] top.testbench.uut.mips_core.cont_cycles.count_int[8] top.testbench.uut.mips_core.cont_cycles.count_int[7] top.testbench.uut.mips_core.cont_cycles.count_int[6] top.testbench.uut.mips_core.cont_cycles.count_int[5] top.testbench.uut.mips_core.cont_cycles.count_int[4] top.testbench.uut.mips_core.cont_cycles.count_int[3] top.testbench.uut.mips_core.cont_cycles.count_int[2] top.testbench.uut.mips_core.cont_cycles.count_int[1] top.testbench.uut.mips_core.cont_cycles.count_int[0]
+@29
+[color] 7
+top.testbench.uut.mips_core.exception_mng.data_abort
+[color] 7
+top.testbench.uut.mips_core.exception_mng.irq
+[color] 7
+top.testbench.uut.mips_core.exception_mng.undef
+@28
+top.testbench.uut.int_ack
++{status_reg} #{top.testbench.uut.mips_core.exception_mng.status_reg.data[1:0]} top.testbench.uut.mips_core.exception_mng.status_reg.data[1] top.testbench.uut.mips_core.exception_mng.status_reg.data[0]
+@24
++{lr} #{top.testbench.uut.mips_core.exception_mng.exception_lr.data[31:0]} top.testbench.uut.mips_core.exception_mng.exception_lr.data[31] top.testbench.uut.mips_core.exception_mng.exception_lr.data[30] top.testbench.uut.mips_core.exception_mng.exception_lr.data[29] top.testbench.uut.mips_core.exception_mng.exception_lr.data[28] top.testbench.uut.mips_core.exception_mng.exception_lr.data[27] top.testbench.uut.mips_core.exception_mng.exception_lr.data[26] top.testbench.uut.mips_core.exception_mng.exception_lr.data[25] top.testbench.uut.mips_core.exception_mng.exception_lr.data[24] top.testbench.uut.mips_core.exception_mng.exception_lr.data[23] top.testbench.uut.mips_core.exception_mng.exception_lr.data[22] top.testbench.uut.mips_core.exception_mng.exception_lr.data[21] top.testbench.uut.mips_core.exception_mng.exception_lr.data[20] top.testbench.uut.mips_core.exception_mng.exception_lr.data[19] top.testbench.uut.mips_core.exception_mng.exception_lr.data[18] top.testbench.uut.mips_core.exception_mng.exception_lr.data[17] top.testbench.uut.mips_core.exception_mng.exception_lr.data[16] top.testbench.uut.mips_core.exception_mng.exception_lr.data[15] top.testbench.uut.mips_core.exception_mng.exception_lr.data[14] top.testbench.uut.mips_core.exception_mng.exception_lr.data[13] top.testbench.uut.mips_core.exception_mng.exception_lr.data[12] top.testbench.uut.mips_core.exception_mng.exception_lr.data[11] top.testbench.uut.mips_core.exception_mng.exception_lr.data[10] top.testbench.uut.mips_core.exception_mng.exception_lr.data[9] top.testbench.uut.mips_core.exception_mng.exception_lr.data[8] top.testbench.uut.mips_core.exception_mng.exception_lr.data[7] top.testbench.uut.mips_core.exception_mng.exception_lr.data[6] top.testbench.uut.mips_core.exception_mng.exception_lr.data[5] top.testbench.uut.mips_core.exception_mng.exception_lr.data[4] top.testbench.uut.mips_core.exception_mng.exception_lr.data[3] top.testbench.uut.mips_core.exception_mng.exception_lr.data[2] top.testbench.uut.mips_core.exception_mng.exception_lr.data[1] top.testbench.uut.mips_core.exception_mng.exception_lr.data[0]
+[pattern_trace] 1
+[pattern_trace] 0

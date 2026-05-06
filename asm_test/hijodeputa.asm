@@ -1,4 +1,5 @@
 lw r1, 0(r0)
-add r4, r1, r1
-add r4, r4, r4
+lw r2, 4(r0)
+lw r3, 12(r0)
+lw r4, 16(r0)
 

@@ -1,0 +1,105 @@
+[*]
+[*] GTKWave Analyzer v3.3.116 (w)1999-2023 BSI
+[*] Tue Apr  7 00:38:35 2026
+[*]
+[dumpfile] "/home/a2/Documents/aoc2/MIPS_VHDL/testbench.ghw"
+[dumpfile_mtime] "Tue Apr  7 00:26:36 2026"
+[dumpfile_size] 197100
+[savefile] "/home/a2/Documents/aoc2/MIPS_VHDL/asm_test/mac_anidada.gtkw"
+[timestart] 496400000
+[size] 1918 1130
+[pos] -963 -6
+*-24.563002 427300000 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1
+[treeopen] top.
+[treeopen] top.testbench.
+[treeopen] top.testbench.uut.
+[treeopen] top.testbench.uut.io_mem.
+[treeopen] top.testbench.uut.io_mem.md.
+[treeopen] top.testbench.uut.io_mem.md.ram.
+[treeopen] top.testbench.uut.io_mem.output_reg.
+[treeopen] top.testbench.uut.mips_core.
+[treeopen] top.testbench.uut.mips_core.alu_mips.
+[treeopen] top.testbench.uut.mips_core.cont_cycles.
+[treeopen] top.testbench.uut.mips_core.exception_mng.exception_lr.
+[treeopen] top.testbench.uut.mips_core.exception_mng.status_reg.
+[treeopen] top.testbench.uut.mips_core.int_register_bank.
+[treeopen] top.testbench.uut.mips_core.int_register_bank.reg_file.
+[treeopen] top.testbench.uut.mips_core.pc.
+[treeopen] top.testbench.uut.mips_core.unidad_detencion_riesgos.
+[sst_width] 273
+[signals_width] 173
+[sst_expanded] 1
+[sst_vpaned_height] 342
+@28
+top.testbench.reset
+top.testbench.clk
+@c00024
++{pc} #{top.testbench.uut.mips_core.pc.data[31:0]} top.testbench.uut.mips_core.pc.data[31] top.testbench.uut.mips_core.pc.data[30] top.testbench.uut.mips_core.pc.data[29] top.testbench.uut.mips_core.pc.data[28] top.testbench.uut.mips_core.pc.data[27] top.testbench.uut.mips_core.pc.data[26] top.testbench.uut.mips_core.pc.data[25] top.testbench.uut.mips_core.pc.data[24] top.testbench.uut.mips_core.pc.data[23] top.testbench.uut.mips_core.pc.data[22] top.testbench.uut.mips_core.pc.data[21] top.testbench.uut.mips_core.pc.data[20] top.testbench.uut.mips_core.pc.data[19] top.testbench.uut.mips_core.pc.data[18] top.testbench.uut.mips_core.pc.data[17] top.testbench.uut.mips_core.pc.data[16] top.testbench.uut.mips_core.pc.data[15] top.testbench.uut.mips_core.pc.data[14] top.testbench.uut.mips_core.pc.data[13] top.testbench.uut.mips_core.pc.data[12] top.testbench.uut.mips_core.pc.data[11] top.testbench.uut.mips_core.pc.data[10] top.testbench.uut.mips_core.pc.data[9] top.testbench.uut.mips_core.pc.data[8] top.testbench.uut.mips_core.pc.data[7] top.testbench.uut.mips_core.pc.data[6] top.testbench.uut.mips_core.pc.data[5] top.testbench.uut.mips_core.pc.data[4] top.testbench.uut.mips_core.pc.data[3] top.testbench.uut.mips_core.pc.data[2] top.testbench.uut.mips_core.pc.data[1] top.testbench.uut.mips_core.pc.data[0]
+@28
+top.testbench.uut.mips_core.pc.data[31]
+top.testbench.uut.mips_core.pc.data[30]
+top.testbench.uut.mips_core.pc.data[29]
+top.testbench.uut.mips_core.pc.data[28]
+top.testbench.uut.mips_core.pc.data[27]
+top.testbench.uut.mips_core.pc.data[26]
+top.testbench.uut.mips_core.pc.data[25]
+top.testbench.uut.mips_core.pc.data[24]
+top.testbench.uut.mips_core.pc.data[23]
+top.testbench.uut.mips_core.pc.data[22]
+top.testbench.uut.mips_core.pc.data[21]
+top.testbench.uut.mips_core.pc.data[20]
+top.testbench.uut.mips_core.pc.data[19]
+top.testbench.uut.mips_core.pc.data[18]
+top.testbench.uut.mips_core.pc.data[17]
+top.testbench.uut.mips_core.pc.data[16]
+top.testbench.uut.mips_core.pc.data[15]
+top.testbench.uut.mips_core.pc.data[14]
+top.testbench.uut.mips_core.pc.data[13]
+top.testbench.uut.mips_core.pc.data[12]
+top.testbench.uut.mips_core.pc.data[11]
+top.testbench.uut.mips_core.pc.data[10]
+top.testbench.uut.mips_core.pc.data[9]
+top.testbench.uut.mips_core.pc.data[8]
+top.testbench.uut.mips_core.pc.data[7]
+top.testbench.uut.mips_core.pc.data[6]
+top.testbench.uut.mips_core.pc.data[5]
+top.testbench.uut.mips_core.pc.data[4]
+top.testbench.uut.mips_core.pc.data[3]
+top.testbench.uut.mips_core.pc.data[2]
+top.testbench.uut.mips_core.pc.data[1]
+top.testbench.uut.mips_core.pc.data[0]
+@1401200
+-group_end
+@28
+top.testbench.uut.mips_core.stall_mips
+top.testbench.uut.mips_core.stall_id
+@22
++{opcode} #{top.testbench.uut.mips_core.unidad_detencion_riesgos.ir_op_code[5:0]} top.testbench.uut.mips_core.unidad_detencion_riesgos.ir_op_code[5] top.testbench.uut.mips_core.unidad_detencion_riesgos.ir_op_code[4] top.testbench.uut.mips_core.unidad_detencion_riesgos.ir_op_code[3] top.testbench.uut.mips_core.unidad_detencion_riesgos.ir_op_code[2] top.testbench.uut.mips_core.unidad_detencion_riesgos.ir_op_code[1] top.testbench.uut.mips_core.unidad_detencion_riesgos.ir_op_code[0]
+@24
+[color] 3
++{mips_output} #{top.testbench.uut.io_output[31:0]} top.testbench.uut.io_output[31] top.testbench.uut.io_output[30] top.testbench.uut.io_output[29] top.testbench.uut.io_output[28] top.testbench.uut.io_output[27] top.testbench.uut.io_output[26] top.testbench.uut.io_output[25] top.testbench.uut.io_output[24] top.testbench.uut.io_output[23] top.testbench.uut.io_output[22] top.testbench.uut.io_output[21] top.testbench.uut.io_output[20] top.testbench.uut.io_output[19] top.testbench.uut.io_output[18] top.testbench.uut.io_output[17] top.testbench.uut.io_output[16] top.testbench.uut.io_output[15] top.testbench.uut.io_output[14] top.testbench.uut.io_output[13] top.testbench.uut.io_output[12] top.testbench.uut.io_output[11] top.testbench.uut.io_output[10] top.testbench.uut.io_output[9] top.testbench.uut.io_output[8] top.testbench.uut.io_output[7] top.testbench.uut.io_output[6] top.testbench.uut.io_output[5] top.testbench.uut.io_output[4] top.testbench.uut.io_output[3] top.testbench.uut.io_output[2] top.testbench.uut.io_output[1] top.testbench.uut.io_output[0]
+@29
+top.testbench.uut.mips_core.stall_mips
+@28
+top.testbench.uut.mips_core.unidad_detencion_riesgos.valid_i_id
+top.testbench.uut.mips_core.unidad_detencion_riesgos.valid_i_ex
+top.testbench.uut.mips_core.unidad_detencion_riesgos.valid_i_mem
+@24
+[color] 3
++{cycles} #{top.testbench.uut.mips_core.cont_cycles.count_int[15:0]} top.testbench.uut.mips_core.cont_cycles.count_int[15] top.testbench.uut.mips_core.cont_cycles.count_int[14] top.testbench.uut.mips_core.cont_cycles.count_int[13] top.testbench.uut.mips_core.cont_cycles.count_int[12] top.testbench.uut.mips_core.cont_cycles.count_int[11] top.testbench.uut.mips_core.cont_cycles.count_int[10] top.testbench.uut.mips_core.cont_cycles.count_int[9] top.testbench.uut.mips_core.cont_cycles.count_int[8] top.testbench.uut.mips_core.cont_cycles.count_int[7] top.testbench.uut.mips_core.cont_cycles.count_int[6] top.testbench.uut.mips_core.cont_cycles.count_int[5] top.testbench.uut.mips_core.cont_cycles.count_int[4] top.testbench.uut.mips_core.cont_cycles.count_int[3] top.testbench.uut.mips_core.cont_cycles.count_int[2] top.testbench.uut.mips_core.cont_cycles.count_int[1] top.testbench.uut.mips_core.cont_cycles.count_int[0]
+@28
+[color] 7
+top.testbench.uut.mips_core.exception_mng.data_abort
+[color] 7
+top.testbench.uut.mips_core.exception_mng.irq
+[color] 7
+top.testbench.uut.mips_core.exception_mng.undef
+top.testbench.uut.int_ack
++{status_reg} #{top.testbench.uut.mips_core.exception_mng.status_reg.data[1:0]} top.testbench.uut.mips_core.exception_mng.status_reg.data[1] top.testbench.uut.mips_core.exception_mng.status_reg.data[0]
+@24
++{lr} #{top.testbench.uut.mips_core.exception_mng.exception_lr.data[31:0]} top.testbench.uut.mips_core.exception_mng.exception_lr.data[31] top.testbench.uut.mips_core.exception_mng.exception_lr.data[30] top.testbench.uut.mips_core.exception_mng.exception_lr.data[29] top.testbench.uut.mips_core.exception_mng.exception_lr.data[28] top.testbench.uut.mips_core.exception_mng.exception_lr.data[27] top.testbench.uut.mips_core.exception_mng.exception_lr.data[26] top.testbench.uut.mips_core.exception_mng.exception_lr.data[25] top.testbench.uut.mips_core.exception_mng.exception_lr.data[24] top.testbench.uut.mips_core.exception_mng.exception_lr.data[23] top.testbench.uut.mips_core.exception_mng.exception_lr.data[22] top.testbench.uut.mips_core.exception_mng.exception_lr.data[21] top.testbench.uut.mips_core.exception_mng.exception_lr.data[20] top.testbench.uut.mips_core.exception_mng.exception_lr.data[19] top.testbench.uut.mips_core.exception_mng.exception_lr.data[18] top.testbench.uut.mips_core.exception_mng.exception_lr.data[17] top.testbench.uut.mips_core.exception_mng.exception_lr.data[16] top.testbench.uut.mips_core.exception_mng.exception_lr.data[15] top.testbench.uut.mips_core.exception_mng.exception_lr.data[14] top.testbench.uut.mips_core.exception_mng.exception_lr.data[13] top.testbench.uut.mips_core.exception_mng.exception_lr.data[12] top.testbench.uut.mips_core.exception_mng.exception_lr.data[11] top.testbench.uut.mips_core.exception_mng.exception_lr.data[10] top.testbench.uut.mips_core.exception_mng.exception_lr.data[9] top.testbench.uut.mips_core.exception_mng.exception_lr.data[8] top.testbench.uut.mips_core.exception_mng.exception_lr.data[7] top.testbench.uut.mips_core.exception_mng.exception_lr.data[6] top.testbench.uut.mips_core.exception_mng.exception_lr.data[5] top.testbench.uut.mips_core.exception_mng.exception_lr.data[4] top.testbench.uut.mips_core.exception_mng.exception_lr.data[3] top.testbench.uut.mips_core.exception_mng.exception_lr.data[2] top.testbench.uut.mips_core.exception_mng.exception_lr.data[1] top.testbench.uut.mips_core.exception_mng.exception_lr.data[0]
+@22
++{acc} #{top.testbench.uut.mips_core.alu_mips.acc_register.data[31:0]} top.testbench.uut.mips_core.alu_mips.acc_register.data[31] top.testbench.uut.mips_core.alu_mips.acc_register.data[30] top.testbench.uut.mips_core.alu_mips.acc_register.data[29] top.testbench.uut.mips_core.alu_mips.acc_register.data[28] top.testbench.uut.mips_core.alu_mips.acc_register.data[27] top.testbench.uut.mips_core.alu_mips.acc_register.data[26] top.testbench.uut.mips_core.alu_mips.acc_register.data[25] top.testbench.uut.mips_core.alu_mips.acc_register.data[24] top.testbench.uut.mips_core.alu_mips.acc_register.data[23] top.testbench.uut.mips_core.alu_mips.acc_register.data[22] top.testbench.uut.mips_core.alu_mips.acc_register.data[21] top.testbench.uut.mips_core.alu_mips.acc_register.data[20] top.testbench.uut.mips_core.alu_mips.acc_register.data[19] top.testbench.uut.mips_core.alu_mips.acc_register.data[18] top.testbench.uut.mips_core.alu_mips.acc_register.data[17] top.testbench.uut.mips_core.alu_mips.acc_register.data[16] top.testbench.uut.mips_core.alu_mips.acc_register.data[15] top.testbench.uut.mips_core.alu_mips.acc_register.data[14] top.testbench.uut.mips_core.alu_mips.acc_register.data[13] top.testbench.uut.mips_core.alu_mips.acc_register.data[12] top.testbench.uut.mips_core.alu_mips.acc_register.data[11] top.testbench.uut.mips_core.alu_mips.acc_register.data[10] top.testbench.uut.mips_core.alu_mips.acc_register.data[9] top.testbench.uut.mips_core.alu_mips.acc_register.data[8] top.testbench.uut.mips_core.alu_mips.acc_register.data[7] top.testbench.uut.mips_core.alu_mips.acc_register.data[6] top.testbench.uut.mips_core.alu_mips.acc_register.data[5] top.testbench.uut.mips_core.alu_mips.acc_register.data[4] top.testbench.uut.mips_core.alu_mips.acc_register.data[3] top.testbench.uut.mips_core.alu_mips.acc_register.data[2] top.testbench.uut.mips_core.alu_mips.acc_register.data[1] top.testbench.uut.mips_core.alu_mips.acc_register.data[0]
++{shadow_acc} #{top.testbench.uut.mips_core.alu_mips.acc_shadow[31:0]} top.testbench.uut.mips_core.alu_mips.acc_shadow[31] top.testbench.uut.mips_core.alu_mips.acc_shadow[30] top.testbench.uut.mips_core.alu_mips.acc_shadow[29] top.testbench.uut.mips_core.alu_mips.acc_shadow[28] top.testbench.uut.mips_core.alu_mips.acc_shadow[27] top.testbench.uut.mips_core.alu_mips.acc_shadow[26] top.testbench.uut.mips_core.alu_mips.acc_shadow[25] top.testbench.uut.mips_core.alu_mips.acc_shadow[24] top.testbench.uut.mips_core.alu_mips.acc_shadow[23] top.testbench.uut.mips_core.alu_mips.acc_shadow[22] top.testbench.uut.mips_core.alu_mips.acc_shadow[21] top.testbench.uut.mips_core.alu_mips.acc_shadow[20] top.testbench.uut.mips_core.alu_mips.acc_shadow[19] top.testbench.uut.mips_core.alu_mips.acc_shadow[18] top.testbench.uut.mips_core.alu_mips.acc_shadow[17] top.testbench.uut.mips_core.alu_mips.acc_shadow[16] top.testbench.uut.mips_core.alu_mips.acc_shadow[15] top.testbench.uut.mips_core.alu_mips.acc_shadow[14] top.testbench.uut.mips_core.alu_mips.acc_shadow[13] top.testbench.uut.mips_core.alu_mips.acc_shadow[12] top.testbench.uut.mips_core.alu_mips.acc_shadow[11] top.testbench.uut.mips_core.alu_mips.acc_shadow[10] top.testbench.uut.mips_core.alu_mips.acc_shadow[9] top.testbench.uut.mips_core.alu_mips.acc_shadow[8] top.testbench.uut.mips_core.alu_mips.acc_shadow[7] top.testbench.uut.mips_core.alu_mips.acc_shadow[6] top.testbench.uut.mips_core.alu_mips.acc_shadow[5] top.testbench.uut.mips_core.alu_mips.acc_shadow[4] top.testbench.uut.mips_core.alu_mips.acc_shadow[3] top.testbench.uut.mips_core.alu_mips.acc_shadow[2] top.testbench.uut.mips_core.alu_mips.acc_shadow[1] top.testbench.uut.mips_core.alu_mips.acc_shadow[0]
+[pattern_trace] 1
+[pattern_trace] 0

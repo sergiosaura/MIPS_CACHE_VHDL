@@ -58,7 +58,7 @@ begin
                		"00";
 	-- Se pone en el 10 al reves para que no se usen los mismos registros en las operaciones aritmeticas
 	MUX_ctrl_B <= 	"11" when (Corto_B_JAL_Mem = '1') else
+					"01" when (Corto_B_Mem  = '1') else				
 					"10" when (Corto_B_WB = '1') else  
-					"01" when (Corto_B_Mem  = '1') else
                		"00";	
 end Behavioral;

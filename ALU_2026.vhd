@@ -26,7 +26,10 @@ entity ALU_Vector_MAC is
 		   reset : in  STD_LOGIC;
 		   ready : out STD_LOGIC; --initially is always '1', but if ALU supports multicycle ops, it will be cero when the output is not ready
            ALUctrl : in  STD_LOGIC_VECTOR (2 downto 0); -- Ops: "000" add, "001" sub, "010" AND, "011" OR, "100" MAC with internal acc, "101" MAC without previous acc.
-           Dout : out  STD_LOGIC_VECTOR (31 downto 0)); -- Output
+           Dout : out  STD_LOGIC_VECTOR (31 downto 0); -- Output
+           -- Shadow ACC register for exception handling
+           Exception_accepted : in STD_LOGIC;
+           RTE_restore : in STD_LOGIC);
 end ALU_Vector_MAC;
 
 architecture Behavioral of ALU_Vector_MAC is
@@ -52,6 +55,8 @@ signal prod0_out, prod1_out, prod2_out, prod3_out : STD_LOGIC_VECTOR(15 downto 0
 signal sum1, sum2 : Signed(16 downto 0);
 signal sum_total : Signed(17 downto 0);
 signal load_acc, load_mul, load_add, Acc_op, MAC_start : STD_LOGIC; -- Añadido load_mul y laod_add para cargar en los nuevos registros
+signal ACC_shadow : STD_LOGIC_VECTOR (31 downto 0);
+signal load_acc_final : STD_LOGIC;
 
 -- to improve readability
 CONSTANT MAC_MUL 	 : STD_LOGIC_VECTOR (1 downto 0) 	:= "00";
@@ -96,13 +101,27 @@ begin
 	-- Es una MUX del final de la ALU para elegir la salida
 	-- Si es MAC_ini usará la salida del resultado de la suma donde luego se transformará en std_logic_vector en el switch de abajo para la salida de la ALU y para cargar en ACC_register
 	-- Si es MAC cogerá la salida del registro que guarda la suma de los productos y lo sumará con ACC ya que tarda 3 ciclos y no 2 como MAC_ini
-	ACC_input <= sum_total_ext when (MAC_start = '1')
+	ACC_input <= signed(ACC_shadow) when (RTE_restore = '1')
+				 else sum_total_ext when (MAC_start = '1')
 				 else signed(sum_total_ext_out) + signed(ACC_out);
 
 	--reset is currentlly unused in the ALU, but it will be needed if it becomes multicycle
-	-- Registro acumulador ACC
+	-- Shadow ACC register: guarda ACC al aceptar una excepción, lo restaura con RTE
+	Shadow_ACC_proc: process(clk)
+	begin
+		if (clk'event and clk = '1') then
+			if (Exception_accepted = '1') then
+				ACC_shadow <= ACC_out;
+			elsif (reset = '1') then
+				ACC_shadow <= (others => '0');
+			end if;
+		end if;
+	end process;
+
+	-- Registro acumulador ACC (load también activo al restaurar desde shadow)
+	load_acc_final <= load_acc or RTE_restore;
 	ACC_register: reg 	generic map (size => 32)
-						port map (	Din => std_logic_vector(ACC_input), clk => clk, reset => '0', load => load_acc, Dout => ACC_out);
+						port map (	Din => std_logic_vector(ACC_input), clk => clk, reset => reset, load => load_acc_final, Dout => ACC_out);
 					
 	-- NUEVOS REGISTROS PARA LA ALU MULTICICLO
 	--Registros de multiplicación						

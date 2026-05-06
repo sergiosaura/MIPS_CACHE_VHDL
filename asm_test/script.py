@@ -33,6 +33,7 @@ def ensamblador_a_hex(instruccion):
         opcodes = {
             'nop': '000000',
             'add': '000001',
+            'sub': '000001',
             'mac': '000001',
             'mac_ini': '000001',
             'and': '000001',
@@ -49,6 +50,7 @@ def ensamblador_a_hex(instruccion):
 
         functs = {
             'add': '00000000000',
+            'sub': '00000000001',
             'mov': '00000000000',   # mov rd, rs  -> add rd, rs, r0
             'and': '00000000010',
             'or':  '00000000011',
@@ -67,7 +69,7 @@ def ensamblador_a_hex(instruccion):
         elif opcode == 'ret':
             rs = format(int(partes[1][1:]), '05b')
 
-        elif opcode in ['add', 'and', 'or', 'mac', 'mac_ini']:
+        elif opcode in ['add', 'sub', 'and', 'or', 'mac', 'mac_ini']:
             # formato: op rd, rs, rt
             rd = format(int(partes[1][1:]), '05b')
             rs = format(int(partes[2][1:]), '05b')
@@ -108,7 +110,7 @@ def ensamblador_a_hex(instruccion):
 
         binario = opcodes[opcode] + rs + rt
 
-        if opcode in ['add', 'and', 'or', 'mov', 'mac', 'mac_ini']:
+        if opcode in ['add', 'sub', 'and', 'or', 'mov', 'mac', 'mac_ini']:
             binario += rd + functs[opcode]
         else:
             binario += imm
