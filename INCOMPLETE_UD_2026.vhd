@@ -67,7 +67,7 @@ begin
 	-- rs_read <= '1' when ((IR_op_code = ARIT_opcode) or (IR_op_code = LW_opcode) or (IR_op_code = SW_opcode) or (IR_op_code = BEQ_opcode) or (IR_op_code = RET_opcode) or (IR_op_code = FI_opcode)) else '0';
 	rs_read <= '1' when ((IR_op_code = ARIT_opcode) or (IR_op_code = LW_opcode) or (IR_op_code = SW_opcode) or (IR_op_code = BEQ_opcode) or (IR_op_code = RET_opcode)) else '0';
 	-- Rt is not read in instructions: LW, NOP, RTE, RET and JAL
-	rt_read <= '1' when ((IR_op_code = ARIT_opcode) or (IR_op_code = BEQ_opcode) or (IR_op_code = SW_opcode)); --complete
+	rt_read <= '1' when ((IR_op_code = ARIT_opcode) or (IR_op_code = BEQ_opcode) or (IR_op_code = SW_opcode)) else '0'; --complete
 	-- Conditions for each dependency:
 	-- Notation: dep_rs_EX: data dependecy in Rs, with the instruction in EX stage.
 
