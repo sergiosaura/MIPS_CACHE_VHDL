@@ -321,7 +321,7 @@ Mem_ERROR <= '1' when (error_state = memory_error) else '0';
 				-- dirty_bits_in 	<= set_clean_mask when (Block_copied_back ='1'), usa un mas máscara para limpiar ese bit
 				Block_copied_back <= '1'; 
 				inc_cb <= '1'; -- Contador copy back
-				next_state <= ADDR; -- El Frame se pondra a 0 en inicio
+				next_state <= Arbitro; -- El Frame se pondra a 0 en inicio
 			end if;
 
 		when WriteAround =>

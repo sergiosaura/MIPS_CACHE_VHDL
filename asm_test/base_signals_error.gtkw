@@ -1,23 +1,21 @@
 [*]
 [*] GTKWave Analyzer v3.3.116 (w)1999-2023 BSI
-[*] Sun May 10 19:24:24 2026
+[*] Sun May 10 23:29:45 2026
 [*]
 [dumpfile] "/home/a2/Documents/aoc2/MIPS_CACHE_VHDL/testbench.ghw"
-[dumpfile_mtime] "Sun May 10 17:08:26 2026"
-[dumpfile_size] 300602
-[savefile] "/home/a2/Documents/aoc2/MIPS_CACHE_VHDL/asm_test/base_signals.gtkw"
-[timestart] 542000000
+[dumpfile_mtime] "Sun May 10 23:21:33 2026"
+[dumpfile_size] 320159
+[savefile] "/home/a2/Documents/aoc2/MIPS_CACHE_VHDL/asm_test/base_signals_error.gtkw"
+[timestart] 115100000
 [size] 1918 1010
 [pos] -3203 -6
-*-25.000000 15400000 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1
+*-25.000000 185300000 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1
 [treeopen] top.
 [treeopen] top.testbench.
 [treeopen] top.testbench.uut.
 [treeopen] top.testbench.uut.io_mem.
 [treeopen] top.testbench.uut.io_mem.mc.
-[treeopen] top.testbench.uut.io_mem.mc.cont_cb.
-[treeopen] top.testbench.uut.io_mem.mc.cont_r.
-[treeopen] top.testbench.uut.io_mem.mc.cont_w.
+[treeopen] top.testbench.uut.io_mem.mc.unidad_control.
 [treeopen] top.testbench.uut.io_mem.mc.via_0.
 [treeopen] top.testbench.uut.io_mem.mc.via_0.mc_tags.
 [treeopen] top.testbench.uut.mips_core.pc.
@@ -30,7 +28,7 @@
 top.testbench.clk
 @22
 +{id_opcode} #{top.testbench.uut.mips_core.uc_seg.ir_op_code[5:0]} top.testbench.uut.mips_core.uc_seg.ir_op_code[5] top.testbench.uut.mips_core.uc_seg.ir_op_code[4] top.testbench.uut.mips_core.uc_seg.ir_op_code[3] top.testbench.uut.mips_core.uc_seg.ir_op_code[2] top.testbench.uut.mips_core.uc_seg.ir_op_code[1] top.testbench.uut.mips_core.uc_seg.ir_op_code[0]
-@c00025
+@c00024
 +{mips_addr} #{top.testbench.uut.mips_addr[31:0]} top.testbench.uut.mips_addr[31] top.testbench.uut.mips_addr[30] top.testbench.uut.mips_addr[29] top.testbench.uut.mips_addr[28] top.testbench.uut.mips_addr[27] top.testbench.uut.mips_addr[26] top.testbench.uut.mips_addr[25] top.testbench.uut.mips_addr[24] top.testbench.uut.mips_addr[23] top.testbench.uut.mips_addr[22] top.testbench.uut.mips_addr[21] top.testbench.uut.mips_addr[20] top.testbench.uut.mips_addr[19] top.testbench.uut.mips_addr[18] top.testbench.uut.mips_addr[17] top.testbench.uut.mips_addr[16] top.testbench.uut.mips_addr[15] top.testbench.uut.mips_addr[14] top.testbench.uut.mips_addr[13] top.testbench.uut.mips_addr[12] top.testbench.uut.mips_addr[11] top.testbench.uut.mips_addr[10] top.testbench.uut.mips_addr[9] top.testbench.uut.mips_addr[8] top.testbench.uut.mips_addr[7] top.testbench.uut.mips_addr[6] top.testbench.uut.mips_addr[5] top.testbench.uut.mips_addr[4] top.testbench.uut.mips_addr[3] top.testbench.uut.mips_addr[2] top.testbench.uut.mips_addr[1] top.testbench.uut.mips_addr[0]
 @28
 top.testbench.uut.mips_addr[31]
@@ -65,7 +63,7 @@ top.testbench.uut.mips_addr[3]
 top.testbench.uut.mips_addr[2]
 top.testbench.uut.mips_addr[1]
 top.testbench.uut.mips_addr[0]
-@1401205
+@1401200
 -group_end
 @24
 +{Data_Mips (Din)} #{top.testbench.uut.io_mem.din[31:0]} top.testbench.uut.io_mem.din[31] top.testbench.uut.io_mem.din[30] top.testbench.uut.io_mem.din[29] top.testbench.uut.io_mem.din[28] top.testbench.uut.io_mem.din[27] top.testbench.uut.io_mem.din[26] top.testbench.uut.io_mem.din[25] top.testbench.uut.io_mem.din[24] top.testbench.uut.io_mem.din[23] top.testbench.uut.io_mem.din[22] top.testbench.uut.io_mem.din[21] top.testbench.uut.io_mem.din[20] top.testbench.uut.io_mem.din[19] top.testbench.uut.io_mem.din[18] top.testbench.uut.io_mem.din[17] top.testbench.uut.io_mem.din[16] top.testbench.uut.io_mem.din[15] top.testbench.uut.io_mem.din[14] top.testbench.uut.io_mem.din[13] top.testbench.uut.io_mem.din[12] top.testbench.uut.io_mem.din[11] top.testbench.uut.io_mem.din[10] top.testbench.uut.io_mem.din[9] top.testbench.uut.io_mem.din[8] top.testbench.uut.io_mem.din[7] top.testbench.uut.io_mem.din[6] top.testbench.uut.io_mem.din[5] top.testbench.uut.io_mem.din[4] top.testbench.uut.io_mem.din[3] top.testbench.uut.io_mem.din[2] top.testbench.uut.io_mem.din[1] top.testbench.uut.io_mem.din[0]
@@ -76,6 +74,19 @@ top.testbench.uut.io_mem.mc.unidad_control.state
 @28
 top.testbench.uut.io_mem.mc.unidad_control.bus_trdy
 top.testbench.uut.io_mem_ready
+@800200
+-Mem_Error
+@28
+[color] 1
+top.testbench.uut.io_mem.mem_error
+[color] 1
+top.testbench.uut.io_mem.mc.load_addr_error
+[color] 1
+top.testbench.uut.io_mem.mc.unaligned
+@1000200
+-Mem_Error
+@28
+top.testbench.uut.io_mem.mc.internal_addr
 @800200
 -HitSignals
 @22
