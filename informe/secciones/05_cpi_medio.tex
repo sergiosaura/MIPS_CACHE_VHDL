@@ -1,0 +1,61 @@
+\section{Ciclos medios por acceso a memoria}
+\label{sec:cpi}
+
+Sea $T$ el coste medio (en ciclos) de un acceso a memoria del MIPS. Distinguimos las
+siguientes clases de eventos, con sus probabilidades $p_x$ (que suman 1) y costes
+$C_x$:
+
+\begin{table}[htbp]
+\centering
+\renewcommand{\arraystretch}{1.25}
+\begin{tabular}{l l l}
+\toprule
+\textbf{Evento} & \textbf{Coste $C_x$} & \textbf{Notas} \\
+\midrule
+Hit lectura/escritura            & $1$ & resuelto en \estado{Inicio} en un ciclo \\
+Miss limpio (lectura cacheable)  & $T_\textit{arb} + 1 + \mathrm{CrB(MD)}$
+                                 & \estado{Arbitro}+\estado{ADDR}+\estado{Fetch} \\
+Miss sucio (lectura cacheable)   & $T_\textit{arb} + 1 + \mathrm{CwB(MD)} + 1 + \mathrm{CrB(MD)}$
+                                 & a\~nade copy-back y nueva fase ADDR \\
+Write miss (write-around)        & $T_\textit{arb} + 1 + \mathrm{CwW(MD)}$
+                                 & ni sube bloque ni incrementa \sig{cont\_w} \\
+Acceso a MD Scratch (lw/sw)      & $T_\textit{arb} + 1 + \mathrm{CrW/CwW(MDscratch)}$ & non-cacheable \\
+Acceso a IO\_REG                 & $\mathrm{CrW/CwW(IO\_REG)}$
+                                 & no usa el bus \\
+Lectura a \sig{Addr\_Error\_Reg} & $1$ & se sirve en \estado{Inicio} \\
+Acceso err\'oneo                 & $T_\textit{arb} + 1 + 1$
+                                 & \estado{Arbitro}+\estado{ADDR}+vuelta a \estado{Inicio} \\
+\bottomrule
+\end{tabular}
+\caption{Coste por evento (\textit{$T_\textit{arb}=1.5$ medio}, $+1$ por la fase
+\estado{ADDR}).}
+\label{tab:costes}
+\end{table}
+
+\paragraph{F\'ormula del coste medio.} Sea $p_h$ la probabilidad de acierto,
+$p_{m,c}$ la de miss limpio, $p_{m,d}$ la de miss sucio, $p_{wa}$ la de write
+miss, $p_\textit{scr}$ la de acceso a scratch y $p_\textit{io}$ la de acceso
+a IO. Entonces:
+\begin{align}
+T &= p_h\cdot 1
+   + p_{m,c}\bigl(T_\textit{arb} + 1 + \mathrm{CrB(MD)}\bigr) \nonumber \\
+  &\quad + p_{m,d}\bigl(T_\textit{arb} + 1 + \mathrm{CwB(MD)} + 1 + \mathrm{CrB(MD)}\bigr) \nonumber \\
+  &\quad + p_{wa}\bigl(T_\textit{arb} + 1 + \mathrm{CwW(MD)}\bigr) \nonumber \\
+  &\quad + p_\textit{scr}\bigl(T_\textit{arb} + 1 + C_\textit{scr}\bigr)
+   + p_\textit{io}\cdot C_\textit{io}.
+\label{eq:cpi}
+\end{align}
+
+\paragraph{Estimaci\'on para el test de integraci\'on.}
+A partir de los contadores observados al final de \texttt{tb\_integracion.asm}
+(\dato{cont\_m=13, cont\_w=4, cont\_r=20, cont\_cb=4} esperados; verificar tras
+simular) y los accesos no contados (scratch e IO), el reparto de eventos es:
+\begin{itemize}[leftmargin=1.2em]
+  \item Aciertos cacheable = $\mathrm{cont\_r}+\mathrm{cont\_w} - \text{accesos sobre miss}$ \dato{TBD}.
+  \item Misses limpios = $\mathrm{cont\_m}-\mathrm{cont\_cb}-N_\textit{wa}$ = \dato{TBD}.
+  \item Misses sucios = $\mathrm{cont\_cb}=4$.
+  \item Write-around = $N_\textit{wa}=1$ (la sw a \texttt{0x80} en F5).
+\end{itemize}
+
+Sustituyendo los valores de la tabla~\ref{tab:latencias} en la
+ecuaci\'on~\eqref{eq:cpi} se obtiene $T = \dato{TBD}$ ciclos por acceso.

@@ -1,0 +1,117 @@
+\section{Tests unitarios}
+\label{sec:unit}
+
+Cada caso se ha aislado en un programa de ensamblador propio, generado con el
+\sig{script.py} provisto en \texttt{asm\_test/} (excepto \texttt{tb\_abort}, que se
+distribuye con la ROM precompilada \sig{memoriaRAM\_I\_abort.vhd} para situar la
+rutina de servicio en la palabra 96 de la ROM, exigida por el vector de \sig{Data\_abort}).
+La tabla~\ref{tab:fsm-cobertura} resume qu\'e estados y transiciones de la FSM ejercita
+cada test, y d\'onde se observa la verificaci\'on en el cronograma.
+
+\renewcommand{\arraystretch}{1.18}
+\begin{table}[htbp]
+\centering
+\footnotesize
+\begin{tabularx}{\textwidth}{@{}llXl@{}}
+\toprule
+\textbf{Test} & \textbf{Estados ejercitados} & \textbf{Casos verificados (hit/miss, set, v\'ia)} & \textbf{Cronograma} \\
+\midrule
+\texttt{tb\_write\_hit}
+  & \estado{Inicio}, \estado{Arbitro}, \estado{ADDR}, \estado{Fetch}
+  & 1 read miss s0v0, 5 hits (3 read + 2 write); \sig{cont\_w} se actualiza
+    s\'olo en write hit; bloque queda dirty.
+  & \dato{TBD ciclo $t_1$} \\
+\texttt{tb\_write\_miss}
+  & + \estado{WriteAround}
+  & 1 write miss (write-around) que no sube bloque y no toca \sig{cont\_w};
+    1 read miss posterior trae el dato actualizado.
+  & \dato{TBD ciclo $t_1$} \\
+\texttt{tb\_dirty\_replacement}
+  & + \estado{CopyBack}
+  & Llena s0v0+s0v1, ensucia v0, fuerza miss s0 con reemplazo dirty
+    (\sig{cont\_cb}++); luego reemplazo limpio en el mismo set.
+  & \dato{TBD ciclo $t_1$} \\
+\texttt{tb\_scratch}
+  & + \estado{Scratch}
+  & 2 sw + 2 lw a MD Scratch (single word, no cacheable). Verifica que MC
+    intacta tras los accesos.
+  & \dato{TBD ciclo $t_1$} \\
+\texttt{tb\_io}
+  & \estado{Inicio} (s\'olo)
+  & sw \sig{Output\_Reg}, lw \sig{Input\_Reg}, lw \sig{Output\_Reg}, sw
+    \sig{ACK\_Reg}. Sin actividad en bus de memoria.
+  & \dato{TBD ciclo $t_1$} \\
+\texttt{tb\_abort}
+  & FSM error: \estado{No\_error}$\to$\estado{memory\_error} y vuelta
+  & lw desalineado dispara \sig{Mem\_Error}; lectura de \sig{Addr\_Error\_Reg}
+    en RT\_Abort lo limpia. Variantes (b)(c) documentadas.
+  & \dato{TBD ciclo $t_1$} \\
+\bottomrule
+\end{tabularx}
+\caption{Cobertura de la FSM por unit test. Tras simular cada caso, sustituir
+\dato{TBD} por la marca temporal del cronograma (en ns) donde se observa el
+evento principal.}
+\label{tab:fsm-cobertura}
+\end{table}
+\renewcommand{\arraystretch}{1.0}
+
+\subsection{Resultados esperados de los contadores}
+
+\begin{table}[htbp]
+\centering
+\begin{tabular}{lcccc}
+\toprule
+\textbf{Test} & \sig{cont\_m} & \sig{cont\_w} & \sig{cont\_r} & \sig{cont\_cb} \\
+\midrule
+\texttt{tb\_write\_hit}          & 1  & 2  & 6  & 0 \\
+\texttt{tb\_write\_miss}         & 3  & 1  & 4  & 0 \\
+\texttt{tb\_dirty\_replacement}  & 4  & 1  & 7  & 1 \\
+\texttt{tb\_scratch}             & 2  & 0  & 4  & 0 \\
+\texttt{tb\_io}                  & 1  & 0  & 3  & 0 \\
+\texttt{tb\_abort}               & 1  & 0  & 1+\dato{$n$} & 0 \\
+\bottomrule
+\end{tabular}
+\caption{Valores finales esperados de los contadores (verificar al final de
+cada simulaci\'on). En \texttt{tb\_abort} \sig{cont\_r} crece cada vez que
+RT\_Abort vuelve a leer \sig{Addr\_Error\_Reg}, por eso queda en funci\'on
+de cu\'antas iteraciones del bucle de error se simulen.}
+\label{tab:contadores-esperados}
+\end{table}
+
+\subsection{Comentarios por caso}
+
+\paragraph{\texttt{tb\_write\_hit}.} Sirve para visualizar el camino corto
+\estado{Inicio}$\to$\estado{Arbitro}$\to$\estado{ADDR}$\to$\estado{Fetch}$\to$\estado{Inicio}
+una vez (el read miss inicial) y posteriormente cinco transiciones autom\'aticas
+\estado{Inicio}$\to$\estado{Inicio} (todos los hits). Las dos escrituras hit
+deben dejar el bit \sig{dirty} del bloque a `1' (visible en
+\sig{Via\_2026\_CB.dirty\_bits}).
+
+\paragraph{\texttt{tb\_write\_miss}.} Demuestra la pol\'itica write-around: el sw a
+\texttt{0x40} pasa por \estado{Arbitro}$\to$\estado{ADDR}$\to$\estado{WriteAround}
+y vuelve a \estado{Inicio} sin actualizar la cach\'e. El siguiente lw a la misma
+direcci\'on s\'i sube el bloque (read miss limpio), demostrando que la escritura
+fue efectiva en MD.
+
+\paragraph{\texttt{tb\_dirty\_replacement}.} El paso (3) entra a
+\estado{CopyBack} (con \sig{send\_dirty}=`1' y \sig{MC\_bus\_Write}=`1' ya en
+\estado{ADDR}), transfiere las 4 palabras del bloque sucio, vuelve a \estado{ADDR}
+para emitir la fase de direcci\'on del fetch y completa con \estado{Fetch}. La
+pareja \estado{CopyBack}+\estado{Fetch} es el camino m\'as costoso de la m\'aquina.
+
+\paragraph{\texttt{tb\_scratch}.} \estado{Scratch} se distingue de \estado{WriteAround}
+en que sirve tanto lecturas como escrituras (\sig{MC\_bus\_Read}=\sig{RE},
+\sig{MC\_bus\_Write}=\sig{WE}). Se observa que el \sig{addr\_non\_cacheable} hace
+saltar desde \estado{Inicio} a \estado{Arbitro} sin incrementar \sig{cont\_m}.
+
+\paragraph{\texttt{tb\_io}.} El decodificador interno de \sig{IO\_MD\_subsystem}
+intercepta los accesos a \texttt{0x000070xx} antes de la MC, por lo que las
+se\~nales \sig{RE\_MEM} y \sig{WE\_MEM} se quedan a `0' en estos accesos: la FSM
+permanece en \estado{Inicio} y los contadores no cambian.
+
+\paragraph{\texttt{tb\_abort}.} El acceso desalineado en \estado{Inicio} dispara
+inmediatamente la transici\'on de la FSM secundaria a \estado{memory\_error}
+(\sig{load\_addr\_error}=`1', \sig{Mem\_Error}=`1'). El procesador salta al
+vector de \sig{Data\_abort} y la rutina situada en la palabra 96 lee
+\sig{Addr\_Error\_Reg}, lo que en \estado{Inicio} dispara la transici\'on
+\estado{memory\_error}$\to$\estado{No\_error}.

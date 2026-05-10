@@ -1,0 +1,29 @@
+\section{Listings de los programas de prueba}
+\label{ap:asm}
+
+Se reproducen \'iintegramente los programas en ensamblador utilizados para los
+tests unitarios y para el test de integraci\'on. Cada listing se acompa\~na de
+los valores esperados de los contadores y de las observaciones relevantes en el
+cronograma.
+
+\subsection{Test unitario: Write Hit}
+\lstinputlisting[language=mipsasm,caption={\texttt{tb\_write\_hit.asm}}]{../asm_test/tb_write_hit.asm}
+
+\subsection{Test unitario: Write Miss (write-around)}
+\lstinputlisting[language=mipsasm,caption={\texttt{tb\_write\_miss.asm}}]{../asm_test/tb_write_miss.asm}
+
+\subsection{Test unitario: Reemplazo de bloque sucio}
+\lstinputlisting[language=mipsasm,caption={\texttt{tb\_dirty\_replacement.asm}}]{../asm_test/tb_dirty_replacement.asm}
+
+\subsection{Test unitario: MD Scratch}
+\lstinputlisting[language=mipsasm,caption={\texttt{tb\_scratch.asm}}]{../asm_test/tb_scratch.asm}
+
+\subsection{Test unitario: Registros IO}
+\lstinputlisting[language=mipsasm,caption={\texttt{tb\_io.asm}}]{../asm_test/tb_io.asm}
+
+\subsection{Test unitario: Data\_abort}
+\lstinputlisting[language=mipsasm,caption={\texttt{tb\_abort.asm}}]{../asm_test/tb_abort.asm}
+
+\subsection{Test de integraci\'on}
+\label{ap:integracion}
+\lstinputlisting[language=mipsasm,caption={\texttt{tb\_integracion.asm}}]{../asm_test/tb_integracion.asm}

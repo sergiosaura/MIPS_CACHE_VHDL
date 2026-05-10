@@ -1,0 +1,202 @@
+\section{Grafo de estados de la UC}
+\label{sec:grafo}
+
+\subsection{Diagrama}
+
+La UC implementa una FSM tipo \textbf{Mealy} de siete estados \'utiles. Las salidas
+dependen del estado y de las entradas \sig{RE}, \sig{WE}, \sig{hit}, \sig{Bus\_grant},
+\sig{Bus\_DevSel}, \sig{Bus\_TRDY}, \sig{addr\_non\_cacheable}, \sig{internal\_addr},
+\sig{unaligned}, \sig{dirty\_bit\_rpl} y \sig{via\_2\_rpl}. Por claridad, en el grafo
+se etiquetan \'unicamente las condiciones que disparan cada transici\'on; las salidas
+activas en cada estado se detallan en la tabla~\ref{tab:fsm-salidas}.
+
+\begin{figure}[htbp]
+\centering
+\begin{tikzpicture}[
+    >=Stealth,
+    node distance=22mm and 26mm,
+    state/.style={rectangle, rounded corners=3pt, draw=black!70, thick,
+                  fill=blue!8, minimum width=22mm, minimum height=9mm,
+                  align=center, font=\small},
+    err/.style={rectangle, rounded corners=3pt, draw=red!70, thick,
+                fill=red!8, minimum width=22mm, minimum height=9mm,
+                align=center, font=\small},
+    every edge/.style={->, draw=black!70, thick},
+    cond/.style={font=\scriptsize, fill=white, inner sep=1pt}
+]
+
+% --- Estados principales ---
+\node[state] (ini) {\estado{Inicio}};
+\node[state, below=of ini] (arb) {\estado{Arbitro}};
+\node[state, below=of arb] (addr) {\estado{ADDR}};
+
+\node[state, left=33mm of addr] (fetch) {\estado{Fetch}};
+\node[state, below=of fetch] (cb) {\estado{CopyBack}};
+\node[state, right=33mm of addr] (wa) {\estado{WriteAround}};
+\node[state, below=of wa] (scr) {\estado{Scratch}};
+
+% --- Inicial ---
+\draw[->, thick] ($(ini.north)+(0,8mm)$) -- (ini.north) node[midway, right, font=\scriptsize] {reset};
+
+% --- Inicio: self-loop e ida a Arbitro ---
+\draw (ini) edge[loop right, looseness=8] node[cond,right=2pt] {\begin{tabular}{l}
+$\overline{\sig{RE}}\!\cdot\!\overline{\sig{WE}}$\\
+hit\\
+internal\_addr (RE)\\
+unaligned $\to$ err\\
+WE+internal $\to$ err
+\end{tabular}} (ini);
+
+\draw (ini) edge[bend right=15] node[cond, left] {miss \textbf{o} non\_cacheable} (arb);
+
+% --- Arbitro ---
+\draw (arb) edge[loop right] node[cond,right=2pt] {$\overline{\sig{Bus\_grant}}$} (arb);
+\draw (arb) edge node[cond, right] {\sig{Bus\_grant}} (addr);
+
+% --- ADDR a estados de transferencia ---
+\draw (addr) edge[bend left=10] node[cond, above, sloped] {non\_cacheable} (scr);
+\draw (addr) edge node[cond, below, sloped] {RE $\wedge\,\overline{\textit{dirty}}$} (fetch);
+\draw (addr) edge[bend left=20] node[cond, above, sloped] {RE $\wedge$ \textit{dirty}} (cb);
+\draw (addr) edge[bend right=10] node[cond, above, sloped] {WE} (wa);
+
+% ADDR -> Inicio (error)
+\draw (addr.east) edge[bend right=70] node[cond, right] {$\overline{\sig{Bus\_DevSel}}$ $\to$ err} (ini.east);
+
+% --- Fetch ---
+\draw (fetch) edge[loop left] node[cond, left] {\begin{tabular}{r}
+$\overline{\sig{TRDY}}$\\
+$\vee\;\overline{\textit{last\_word}}$
+\end{tabular}} (fetch);
+\draw (fetch.north) edge[bend left=15] node[cond, above, sloped] {last\_word} (ini.west);
+
+% --- CopyBack: vuelve a ADDR ---
+\draw (cb) edge[loop left] node[cond, left] {\begin{tabular}{r}
+$\overline{\sig{TRDY}}$\\
+$\vee\;\overline{\textit{last\_word}}$
+\end{tabular}} (cb);
+\draw (cb) edge[bend left=20] node[cond, above, sloped] {last\_word, cb++} (addr);
+
+% --- WriteAround ---
+\draw (wa) edge[loop right] node[cond, right] {$\overline{\sig{TRDY}}$} (wa);
+\draw (wa.north) edge[bend right=15] node[cond, above, sloped] {\sig{TRDY}} (ini.east);
+
+% --- Scratch ---
+\draw (scr) edge[loop right] node[cond, right] {$\overline{\sig{TRDY}}$} (scr);
+\draw (scr) edge[bend right=20] node[cond, above, sloped] {\sig{TRDY}} (ini.east);
+
+\end{tikzpicture}
+\caption{Grafo de estados de la \sig{UC\_MC} (FSM principal). Las transiciones marcadas
+con ``$\to$~err'' tambi\'en activan la FSM de error mostrada en la
+figura~\ref{fig:fsm-err}.}
+\label{fig:fsm-principal}
+\end{figure}
+
+\begin{figure}[htbp]
+\centering
+\begin{tikzpicture}[
+    >=Stealth,
+    node distance=30mm,
+    err/.style={rectangle, rounded corners=3pt, draw=red!70, thick,
+                fill=red!8, minimum width=24mm, minimum height=9mm,
+                align=center, font=\small},
+    every edge/.style={->, draw=black!70, thick},
+    cond/.style={font=\scriptsize, fill=white, inner sep=1pt}
+]
+\node[err] (noerr) {\estado{No\_error}};
+\node[err, right of=noerr, xshift=22mm] (err) {\estado{memory\_error}};
+
+\draw (noerr) edge[bend left=20] node[cond, above]{\begin{tabular}{c}
+unaligned $\vee$ \\
+WE$\wedge$internal\_addr $\vee$\\
+$\overline{\sig{DevSel}}$
+\end{tabular}} (err);
+\draw (err) edge[bend left=20] node[cond, below]{RE $\wedge$ internal\_addr} (noerr);
+\draw (err) edge[loop right] node[cond, right]{otros} (err);
+\draw (noerr) edge[loop left] node[cond, left]{otros} (noerr);
+\end{tikzpicture}
+\caption{FSM secundaria que controla la se\~nal \sig{Mem\_Error}. En estado
+\estado{memory\_error} se mantiene \sig{Mem\_Error}=`1' y la lectura del registro
+interno \sig{Addr\_Error\_Reg} (direcci\'on \texttt{0x01000000}) la baja.}
+\label{fig:fsm-err}
+\end{figure}
+
+\subsection{Salidas activas por estado (Mealy)}
+
+La tabla~\ref{tab:fsm-salidas} resume las salidas que cada estado activa. Las salidas
+no listadas valen `0' por defecto. Cuando una se\~nal depende de la entrada se indica
+expl\'icitamente; por ejemplo, en \estado{ADDR} la se\~nal \sig{MC\_bus\_Read}
+toma el valor de \sig{RE}.
+
+\renewcommand{\arraystretch}{1.18}
+\begin{table}[htbp]
+\centering
+\footnotesize
+\begin{tabularx}{\textwidth}{@{}lX@{}}
+\toprule
+\textbf{Estado} & \textbf{Salidas activas / observaciones} \\
+\midrule
+\estado{Inicio} &
+  Si idle: \sig{ready}=1.\hfill
+  Si hit lectura: \sig{ready}=1, \sig{inc\_r}=1, \sig{mux\_output}=00.\hfill
+  Si hit escritura: \sig{ready}=1, \sig{inc\_w}=1, \sig{Update\_dirty}=1,
+  \sig{MC\_WE0/1}=1 seg\'un v\'ia con hit.\hfill
+  Si \sig{internal\_addr} con RE: \sig{inc\_r}=1, \sig{mux\_output}=10, FSM error
+  $\to$ \estado{No\_error}.\hfill
+  Si miss o non-cacheable: \sig{inc\_m}=1 (s\'olo cacheable), pasa a \estado{Arbitro}.\hfill
+  Si error (\sig{unaligned} o WE+\sig{internal\_addr}): \sig{ready}=1,
+  \sig{load\_addr\_error}=1, FSM error $\to$ \estado{memory\_error}. \\
+\estado{Arbitro} & \sig{Bus\_req}=1. Espera \sig{Bus\_grant}. \\
+\estado{ADDR} &
+  \sig{Frame}=1, \sig{MC\_send\_addr\_ctrl}=1, \sig{MC\_bus\_Read}=\sig{RE},
+  \sig{MC\_bus\_Write}=\sig{WE}.\hfill
+  Caso reemplazo sucio: tambi\'en \sig{send\_dirty}=1, \sig{MC\_bus\_Write}=1,
+  \sig{block\_addr}=1.\hfill
+  Caso fetch limpio: \sig{block\_addr}=1.\hfill
+  Si $\overline{\sig{Bus\_DevSel}}$: \sig{ready}=1, \sig{load\_addr\_error}=1,
+  FSM error $\to$ \estado{memory\_error}. \\
+\estado{Fetch} &
+  \sig{Frame}=1, \sig{MC\_bus\_Read}=1, \sig{mux\_origen}=1.\hfill
+  Cada palabra recibida: \sig{count\_enable}=1, \sig{MC\_WE0/1}=1 seg\'un \sig{via\_2\_rpl}.\hfill
+  En la \'ultima palabra: \sig{last\_word}=1, \sig{MC\_tags\_WE}=1. \\
+\estado{CopyBack} &
+  \sig{Frame}=1, \sig{MC\_bus\_Write}=1, \sig{MC\_send\_data}=1, \sig{mux\_origen}=1.\hfill
+  Cada palabra: \sig{count\_enable}=1.\hfill
+  En la \'ultima: \sig{last\_word}=1, \sig{Update\_dirty}=1, \sig{Block\_copied\_back}=1,
+  \sig{inc\_cb}=1; vuelve a \estado{ADDR} para emitir la fase de direcci\'on del fetch. \\
+\estado{WriteAround} &
+  \sig{Frame}=1, \sig{MC\_bus\_Write}=1, \sig{MC\_send\_data}=1.\hfill
+  Al transferir: \sig{last\_word}=1, \sig{ready}=1, vuelve a \estado{Inicio}. No
+  incrementa \sig{cont\_w}. \\
+\estado{Scratch} &
+  \sig{Frame}=1, \sig{MC\_bus\_Read}=\sig{RE}, \sig{MC\_bus\_Write}=\sig{WE},
+  \sig{MC\_send\_data}=\sig{WE}.\hfill
+  Al transferir: \sig{last\_word}=1, \sig{ready}=1; en lectura
+  \sig{mux\_output}=01. No toca contadores. \\
+\bottomrule
+\end{tabularx}
+\caption{Salidas activas de la FSM principal por estado.}
+\label{tab:fsm-salidas}
+\end{table}
+\renewcommand{\arraystretch}{1.0}
+
+\paragraph{Justificaci\'on de las salidas clave.}
+\begin{itemize}[leftmargin=1.2em]
+  \item \sig{Frame} se mantiene a `1' durante toda la fase de transferencia (estados
+    \estado{ADDR}, \estado{Fetch}, \estado{CopyBack}, \estado{WriteAround},
+    \estado{Scratch}) para indicar al bus que el manager sigue ocupando el canal; baja
+    autom\'aticamente al volver a \estado{Inicio}.
+  \item \sig{block\_addr} se activa s\'olo en \estado{ADDR} cuando hay transferencia de
+    bloque (fetch o copy-back), de forma que la direcci\'on emitida al bus se enmascara a
+    los 4 bits inferiores en cero. En \estado{WriteAround} y \estado{Scratch} es `0'
+    porque la transferencia es de una sola palabra.
+  \item \sig{mux\_origen} = `1' en \estado{Fetch} y \estado{CopyBack} para que la
+    palabra apuntada por el contador interno (\sig{palabra\_UC}) seleccione la posici\'on
+    de bloque en MC; en cualquier otro estado el origen es la direcci\'on del MIPS.
+  \item \sig{inc\_m}, \sig{inc\_w}, \sig{inc\_r} y \sig{inc\_cb} se activan exactamente
+    un ciclo en su evento, siguiendo la especificaci\'on (cada evento incrementa su
+    contador una sola vez).
+  \item Las dos transiciones que activan \sig{load\_addr\_error} (en \estado{Inicio}
+    por \sig{unaligned}/\,WE+\sig{internal\_addr} y en \estado{ADDR} por
+    $\overline{\sig{Bus\_DevSel}}$) capturan la direcci\'on que caus\'o el fallo en el
+    registro \sig{Addr\_Error\_Reg} y disparan la transici\'on a \estado{memory\_error}.
+\end{itemize}

@@ -1,0 +1,40 @@
+\section{Descomposici\'on de la direcci\'on}
+\label{sec:addr}
+
+La cach\'e tiene $C = 128$ bytes, $b = 16$ bytes/bloque ($w = 4$ palabras de 4 bytes), y
+$s = 2$ v\'ias, lo que da $S = C/(b\cdot s) = 4$ conjuntos. Por tanto la direcci\'on de
+32 bits que llega de la MIPS se descompone como:
+
+\begin{figure}[htbp]
+\centering
+\begin{tikzpicture}[font=\small,
+    field/.style={draw, minimum height=10mm, align=center, font=\footnotesize},
+    bitlabel/.style={font=\scriptsize, gray}
+]
+\node[field, minimum width=66mm, fill=blue!8] (tag) at (0,0) {\textbf{tag}\\26 bits};
+\node[field, minimum width=14mm, fill=green!8, right=0pt of tag] (set) {\textbf{set}\\2 bits};
+\node[field, minimum width=14mm, fill=orange!10, right=0pt of set] (word) {\textbf{palabra}\\2 bits};
+\node[field, minimum width=14mm, fill=red!8, right=0pt of word] (byte) {\textbf{byte}\\2 bits};
+
+\node[bitlabel, above=1pt of tag.north west, anchor=south west] {31};
+\node[bitlabel, above=1pt of set.north west, anchor=south west]   {5};
+\node[bitlabel, above=1pt of word.north west, anchor=south west]  {3};
+\node[bitlabel, above=1pt of byte.north west, anchor=south west]  {1};
+\node[bitlabel, above=1pt of byte.north east, anchor=south east]  {0};
+\end{tikzpicture}
+\caption{Descomposici\'on de los 32 bits de direcci\'on. Los 2 bits de byte son ignorados
+por la MC porque todos los accesos son de palabra alineada (un acceso desalineado
+dispara \sig{Mem\_Error}).}
+\label{fig:addr}
+\end{figure}
+
+\paragraph{Mapa de memoria}
+\begin{itemize}[leftmargin=1.2em]
+  \item \texttt{0x00000000--0x000001FF}: rango cacheable de la MD (128 palabras).
+  \item \texttt{0x10000000--0x100000FF}: MD Scratch (no cacheable, palabra a palabra).
+  \item \texttt{0x00007000}: registro de entrada \sig{Input\_Reg} (lectura).
+  \item \texttt{0x00007004}: registro de salida \sig{Output\_Reg} (lectura/escritura).
+  \item \texttt{0x00007008}: \sig{ACK\_Reg} (escritura, autoclear).
+  \item \texttt{0x01000000}: \sig{Addr\_Error\_Reg} interno de la MC (s\'olo lectura).
+  \item Cualquier otra direcci\'on: \sig{Mem\_Error} por ausencia de \sig{Bus\_DevSel}.
+\end{itemize}

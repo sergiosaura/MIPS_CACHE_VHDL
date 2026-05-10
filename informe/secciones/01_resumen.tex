@@ -1,0 +1,15 @@
+\section{Resumen}
+\label{sec:resumen}
+
+Se ha implementado el controlador de la memoria cach\'e (\sig{UC\_MC}) del subsistema de
+memoria de datos del MIPS segmentado. La cach\'e es de \textbf{2 v\'ias}, \textbf{4 conjuntos},
+\textbf{4 palabras por bloque} (16~B/bloque, 128~B en total), con
+\textbf{reemplazo FIFO}, pol\'itica \textbf{copy-back} en escritura sobre acierto y
+\textbf{write-around} en fallo de escritura. La UC se ha modelado como una FSM Mealy con
+siete estados \'utiles ---\estado{Inicio}, \estado{Arbitro}, \estado{ADDR},
+\estado{Fetch}, \estado{CopyBack}, \estado{WriteAround} y \estado{Scratch}--- y una
+m\'aquina secundaria de errores de dos estados (\estado{No\_error}/\estado{memory\_error})
+que dispara el \sig{Data\_abort} ante accesos desalineados, escrituras al registro de
+solo lectura o direcciones que ning\'un dispositivo del bus reconoce. Cuatro contadores
+internos miden \texttt{cont\_m}, \texttt{cont\_w}, \texttt{cont\_r} y \texttt{cont\_cb}
+para evaluar el rendimiento del dise\~no.

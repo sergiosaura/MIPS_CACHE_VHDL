@@ -1,0 +1,71 @@
+\section{Test de integraci\'on y speedup}
+\label{sec:integracion}
+
+El programa \texttt{tb\_integracion.asm} (anexo~\ref{ap:integracion}) ejercita en
+una \'unica simulaci\'on todos los caminos relevantes de la FSM: relleno de las
+dos v\'ias en los cuatro conjuntos, hits, escrituras hit que ensucian la v\'ia 0,
+una escritura miss con write-around y cuatro reemplazos sucios consecutivos,
+seguidos de accesos a MD Scratch y a registros IO.
+
+\subsection{Cuenta esperada de eventos}
+
+\begin{table}[htbp]
+\centering
+\begin{tabular}{lcccc}
+\toprule
+\textbf{Fase} & \sig{cont\_m} & \sig{cont\_w} & \sig{cont\_r} & \sig{cont\_cb} \\
+\midrule
+F0+F1: relleno v\'ia 0 (incluye constantes)         &  4 & 0 &  4 & 0 \\
+F2: relleno v\'ia 1                                  &  4 & 0 &  4 & 0 \\
+F3: 8 hits de lectura                                &  0 & 0 &  8 & 0 \\
+F4: 4 hits de escritura sobre v\'ia 0                &  0 & 4 &  0 & 0 \\
+F5: 1 write-around                                   &  1 & 0 &  0 & 0 \\
+F6: 4 misses con reemplazo sucio                     &  4 & 0 &  4 & 4 \\
+F7+F8: scratch e IO                                  &  0 & 0 &  0 & 0 \\
+\midrule
+\textbf{Total esperado}                              & \textbf{13} & \textbf{4} & \textbf{20} & \textbf{4} \\
+\bottomrule
+\end{tabular}
+\caption{Reparto previsto de los contadores en \texttt{tb\_integracion.asm}.}
+\label{tab:integracion-esperado}
+\end{table}
+
+Tras simular, anotar los valores reales: \dato{TBD}. Cualquier discrepancia respecto
+a la tabla~\ref{tab:integracion-esperado} debe explicarse (orden FIFO, hits inesperados,
+\ldots).
+
+\subsection{Speedup frente a un sistema sin MC}
+
+El speedup se define como
+\begin{equation}
+S = \frac{T_\textit{sin\_MC}}{T_\textit{con\_MC}}
+\end{equation}
+donde $T_\textit{con\_MC}$ es el n\'umero de ciclos medido en simulaci\'on hasta
+entrar en el bucle final del programa, y $T_\textit{sin\_MC}$ es el coste estimado
+si todo lw/sw cacheable fuese servido directamente por la MD palabra a palabra
+(sin caching). Por construcci\'on, los accesos a scratch y a IO\_REG cuestan lo
+mismo en ambos sistemas, por lo que se cancelan en la divisi\'on; basta con
+restringir el c\'omputo a los lw/sw cacheable.
+
+Sea $N_\textit{lw}$ y $N_\textit{sw}$ el n\'umero de lecturas y escrituras
+cacheable, y $C_\textit{ovh}$ el coste de cada uno en el sistema sin caching:
+$$
+C_\textit{ovh} = T_\textit{arb} + 1 + \mathrm{CwW(MD)}
+$$
+(asumiendo que cada acceso es independiente; con burst no aplica porque cada lw
+es una sola palabra). Entonces
+\begin{equation}
+T_\textit{sin\_MC} \approx \bigl(N_\textit{lw} + N_\textit{sw}\bigr)\cdot C_\textit{ovh}.
+\end{equation}
+
+Con $N_\textit{lw} = \mathrm{cont\_r}+\mathrm{cont\_m\_lw}=$ \dato{TBD},
+$N_\textit{sw} = \mathrm{cont\_w}+N_\textit{wa} =$ \dato{TBD} y los costes de la
+tabla~\ref{tab:latencias}:
+$$
+S = \frac{T_\textit{sin\_MC}}{T_\textit{con\_MC}} = \dato{TBD}.
+$$
+
+\paragraph{Lectura del cronograma.} Para obtener $T_\textit{con\_MC}$, basta marcar
+en GTKWave el flanco de subida de \sig{reset} y el primer ciclo en que el PC del
+MIPS queda atrapado en la instrucci\'on \texttt{beq R0, R0, -1} de F9 (el bucle
+infinito). La diferencia en ciclos es $T_\textit{con\_MC}$.

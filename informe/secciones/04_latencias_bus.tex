@@ -1,0 +1,49 @@
+\section{An\'alisis de latencias del bus}
+\label{sec:latencias}
+
+Se han medido en simulaci\'on los siguientes costes (en ciclos), \emph{excluida} la
+latencia de arbitraje, que se trata aparte como un valor medio constante. La latencia
+del primer dato de la MD (\textit{L}) y la de los datos sucesivos (\textit{R}) se han
+verificado leyendo el modelo \sig{MD\_cont\_2026.vhd}.
+
+\begin{table}[htbp]
+\centering
+\renewcommand{\arraystretch}{1.2}
+\begin{tabular}{lcl}
+\toprule
+\textbf{Magnitud} & \textbf{Ciclos} & \textbf{F\'ormula / observaciones} \\
+\midrule
+$L$ (latencia 1\textsuperscript{a} palabra MD)  & \dato{TBD} & \\
+$R$ (latencia palabras sucesivas MD)            & \dato{TBD} & \\
+\textbf{CrB(MD)}  & \dato{TBD}     & $L + 3R$ \\
+\textbf{CwB(MD)}  & \dato{TBD}     & $L + 3R$ (sim\'etrico, copy-back de bloque completo)\\
+\textbf{CwW(MD)}  & \dato{TBD}     & coste de una escritura de palabra (write-around)\\
+\textbf{CrW(MDscratch)} & \dato{TBD} & 1 ciclo (la scratch responde sin esperas)\\
+\textbf{CwW(MDscratch)} & \dato{TBD} & 1 ciclo \\
+\textbf{CrW(IO\_REG)}   & \dato{TBD} & gestionado por \sig{IO\_MD\_subsystem}, no usa bus \\
+\textbf{CwW(IO\_REG)}   & \dato{TBD} & gestionado por \sig{IO\_MD\_subsystem}, no usa bus \\
+$T_{\textit{arb}}$ & 1.5 (medio) & latencia de arbitraje (asumida seg\'un enunciado) \\
+\bottomrule
+\end{tabular}
+\caption{Latencias de bus medidas en simulaci\'on. Los valores marcados con
+\dato{TBD} se rellenan tras simular cada test unitario y leer del cronograma los
+ciclos entre \sig{Bus\_Frame}=`1' y \sig{Bus\_Frame}=`0'.}
+\label{tab:latencias}
+\end{table}
+
+\paragraph{C\'omo medirlas en GTKWave.} Tras simular cualquier test que produzca el
+evento aislado:
+\begin{itemize}[leftmargin=1.2em]
+  \item $L$: ciclos desde que la MC pone la direcci\'on en el bus
+    (\sig{MC\_send\_addr\_ctrl}=`1') hasta que llega la primera palabra
+    (\sig{MD\_send\_data}=`1' por primera vez con \sig{MD\_Bus\_TRDY}=`1').
+  \item $R$: ciclos entre palabras consecutivas en \estado{Fetch} con
+    \sig{count\_enable}=`1'.
+  \item CrB(MD) y CwB(MD): ciclos completos en \estado{Fetch} y \estado{CopyBack}
+    respectivamente, desde el inicio de \sig{Bus\_Frame} hasta su bajada.
+  \item CwW(MD): ciclos en \estado{WriteAround} desde la activaci\'on de
+    \sig{Bus\_Frame} hasta su bajada.
+  \item CrW/CwW(MDscratch): an\'alogo en \estado{Scratch}.
+  \item CrW/CwW(IO\_REG): los IO se sirven directamente por
+    \sig{IO\_MD\_subsystem} sin pasar por el bus, en 1 ciclo del MIPS.
+\end{itemize}

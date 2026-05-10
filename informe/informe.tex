@@ -1,0 +1,82 @@
+\documentclass[a4paper,11pt]{article}
+
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage[spanish,es-tabla]{babel}
+\usepackage{lmodern}
+\usepackage[margin=2.3cm]{geometry}
+\usepackage{graphicx}
+\usepackage{booktabs}
+\usepackage{array}
+\usepackage{tabularx}
+\usepackage{longtable}
+\usepackage{multirow}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{xcolor}
+\usepackage{listings}
+\usepackage{tikz}
+\usepackage{hyperref}
+\usepackage{caption}
+\usepackage{enumitem}
+
+\usetikzlibrary{shapes,arrows.meta,positioning,calc,fit,backgrounds,decorations.pathmorphing,decorations.markings}
+
+% --- Listings: estilo MIPS asm y VHDL ---
+\definecolor{cmt}{RGB}{0,128,0}
+\definecolor{kw}{RGB}{0,0,180}
+\definecolor{str}{RGB}{180,0,80}
+
+\lstdefinelanguage{mipsasm}{
+  morekeywords={lw,sw,add,sub,and,or,mov,mac,beq,jal,ret,nop,rte,lw_inc,mac_ini},
+  sensitive=false,
+  morecomment=[l]{;},
+}
+
+\lstset{
+  basicstyle=\ttfamily\small,
+  keywordstyle=\color{kw}\bfseries,
+  commentstyle=\color{cmt}\itshape,
+  stringstyle=\color{str},
+  breaklines=true,
+  showstringspaces=false,
+  numbers=left,
+  numberstyle=\tiny\color{gray},
+  numbersep=6pt,
+  frame=single,
+  framesep=3pt,
+  framerule=0.4pt,
+  rulecolor=\color{black!30},
+  captionpos=b,
+  tabsize=2,
+}
+
+\hypersetup{colorlinks=true,linkcolor=blue!50!black,citecolor=blue!50!black,urlcolor=blue!50!black}
+
+% --- Comandos auxiliares ---
+\newcommand{\sig}[1]{\texttt{#1}}
+\newcommand{\estado}[1]{\textsc{#1}}
+\newcommand{\TODO}[1]{\textbf{\textcolor{red}{[TODO: #1]}}}
+\newcommand{\dato}[1]{\textbf{\textcolor{blue!70!black}{[#1]}}}
+
+\title{\vspace{-1cm}AOC2 -- Proyecto 2: Jerarqu\'ia de memoria de datos\\
+\large Dise\~no del controlador de cach\'e (UC\_MC)}
+\author{\TODO{Nombre y apellidos}\\\small Universidad de Zaragoza --- EINA}
+\date{\today}
+
+\begin{document}
+\maketitle
+
+\input{secciones/01_resumen}
+\input{secciones/02_grafo_estados}
+\input{secciones/03_address_breakdown}
+\input{secciones/04_latencias_bus}
+\input{secciones/05_cpi_medio}
+\input{secciones/06_unit_tests}
+\input{secciones/07_integracion_speedup}
+\input{secciones/08_administrativo}
+
+\appendix
+\input{secciones/A1_listings_asm}
+
+\end{document}
