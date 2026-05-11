@@ -192,7 +192,6 @@ Mem_ERROR <= '1' when (error_state = memory_error) else '0';
 		    elsif (RE= '1' and  internal_addr ='1') then -- si quieren leer un registro de la MC se lo mandamos
 		    	next_state <= Inicio;
 				ready <= '1';
-				inc_r <= '1'; -- se lee la MC ¿se pone?
 				mux_output <= "10"; -- La salida es un registro interno de la MC
 				next_error_state <= No_error; --Cuando se lee el registro interno el controlador quita la se�al de error
 			elsif (WE = '1'  and  internal_addr ='1') then -- si quieren escribir en el registro interno de la MC se genera un error porque es s�lo de lectura
