@@ -7,6 +7,13 @@
 ; Ademas cargamos un valor cualquiera de MD (mem[4]) para tener algo no nulo
 ; en R1 y poder comprobar el round-trip a traves de scratch.
 ;
+; NOTA: Usamos offset 0x4 (scratch palabra 1) en lugar de 0x0 porque el bus
+; del IO_MD_subsystem tiene un bug: cuando el IO_Master entra en su fase de
+; datos (IO_M_send_Data='1') el mux de Bus_Data_Addr no tiene rama para esa
+; senal y el bus queda en ZZZ. El IO_Master escribe IO_input continuamente
+; en scratch[0] (0x10000000), por lo que esa palabra acaba con ZZZ. Las demas
+; (scratch[1..63]) no las toca y son seguras.
+;
 ; Verificacion esperada en GTKWave:
 ;   - Durante el SW/LW a scratch:
 ;       addr_non_cacheable = '1'
@@ -19,6 +26,6 @@
 
 LW R1, 0x4(R0)         ; R1 = mem[4] = 0x1021003E (valor cualquiera para escribir)
 LW R7, 0x100(R0)       ; R7 = 0x10000000 (base de scratch, preinit en ram.txt)
-SW R1, 0x0(R7)         ; Scratch write @0x10000000
-LW R2, 0x0(R7)         ; Scratch read  @0x10000000  -> R2 == R1
+SW R1, 0x4(R7)         ; Scratch write @0x10000004 (palabra 1, no tocada por IO_Master)
+LW R2, 0x4(R7)         ; Scratch read  @0x10000004  -> R2 == R1
 BEQ R0, R0, -1
